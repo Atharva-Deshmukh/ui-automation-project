@@ -1,0 +1,18 @@
+{
+  "name": "Automation_Project_Typescript",
+  "version": "1.0.0",
+  "description": "Cypress here is now in fully typescript mode",
+  "main": "index.js",
+  "author": "Atharva Deshmukh",
+  "license": "MIT",
+  "scripts": {
+    "open:dev-int-ui": "cypress open dev-int-ui",
+    "run-headed:dev-int-ui": "cypress run cypress/e2e/dev-int-ui --headed",
+    "run-headless:dev-int-ui": "cypress run cypress/e2e/dev-int-ui --headless"
+  },
+  "devDependencies": {
+    "cypress": "^13.6.2",
+    "cypress-wait-until": "^3.0.1",
+    "typescript": "^5.3.3"
+  }
+}
