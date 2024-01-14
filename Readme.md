@@ -57,6 +57,7 @@ _________________________________________________
 > to add remote: **git remote add origin LOGIN_URL**
 > usually gitignore prevents tracking node modules but I created gitIgnore after pushing node modules, hence I must clear git cache using **git rm -r --cached node_modules**
 > **git merge --allow-unrelated-histories origin/master** to merge branches with no common ancestors
+> **git push origin --delete branch_name** to delete any remote branch 
 _________________________________________________
 REGARDING SSH KEY
 _________________________________________________
