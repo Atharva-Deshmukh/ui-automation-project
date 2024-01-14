@@ -43,10 +43,13 @@ declare global {
     interface Chainable {
         loginTargetSite(targetSite: string, username: string, password: string): void;
         logoutTargetSite(): void;
+        countMenus(): void;
+        logWithPrefix(options: any): string;
     }
   }
 }
 
+// parent commands: can directly used with cy...
 Cypress.Commands.add('loginTargetSite', (targetSite: string, username: string, password: string) => {
     login(targetSite, username, password);
 });
@@ -54,5 +57,34 @@ Cypress.Commands.add('loginTargetSite', (targetSite: string, username: string, p
 Cypress.Commands.add('logoutTargetSite', () => {
     logout();
 });
+
+// child commands: can be used with a parent command 
+Cypress.Commands.add('countMenus', { prevSubject: 'element' }, (subject, options) => {
+  let menuCount: number =  0;
+  cy.wrap(subject).find('ul.oxd-main-menu li a').each(($li) => {
+    const classWithinSubject = $li.attr('class');
+    // cy.log('classWithinSubject -> ', classWithinSubject);
+    const regex = /\b\w*item\w*\b/g;
+    if(regex.test(classWithinSubject)) { menuCount++; }
+    cy.log('menuCount -> ', menuCount);
+  });
+});
+
+// dual commands: can be used with or without a parent
+// Custom command to log a message with a customizable prefix
+Cypress.Commands.add('logWithPrefix', { prevSubject: 'optional' }, (subject, options) => {
+  const prefix = options && options.prefix ? options.prefix : 'Default';
+  const suffix = options && options.suffix ? options.suffix : 'Default';
+  
+  const message = subject?`Subject: ${subject}, Prefix: ${prefix} , Suffix: ${suffix}`: `No subject, Prefix: ${prefix}, Suffix: ${suffix}`;
+
+  cy.log(message);
+
+  // Returning the log message for further use if needed
+  return message;
+});
+
+
+
 
   

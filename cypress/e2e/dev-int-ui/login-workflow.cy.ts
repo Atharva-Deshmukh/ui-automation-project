@@ -11,7 +11,7 @@ describe("Workflow to test login logout using various ways", () => {
     logout();
   });
 
-  it("login logout using custom commands in cypress typescript especially", () => {
+  it("login logout using custom commands (parent custom commands) in cypress typescript especially", () => {
     cy.loginTargetSite(Cypress.env("TARGET_SITE"),
     Cypress.env("ADMIN_USERNAME"),
     Cypress.env("ADMIN_PASSWORD"));

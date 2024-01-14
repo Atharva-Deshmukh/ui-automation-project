@@ -1,4 +1,5 @@
 import { commonTimeOut } from "../fixtures/commonData";
+import * as uiHelper from "../fixtures/uiHelper";
 
 export const logo = () => cy.get(".orangehrm-login-logo").should("be.visible");
 export const usernameInput = () =>
@@ -21,10 +22,12 @@ export function login(targetSite: string, username: string, password: string) {
   passwordInput().type(password);
   loginButton().click();
   cy.waitUntil(() => attendanceCanvas(), commonTimeOut);
+  uiHelper.verifyLoadingSymbol();
 }
 
 export function logout() {
   userDropdownIcon().click();
   userDropdownMenu("Logout").click();
   cy.waitUntil(() => logo(), commonTimeOut);
+  uiHelper.verifyLoadingSymbol();
 }
