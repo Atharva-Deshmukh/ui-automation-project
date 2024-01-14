@@ -50,6 +50,9 @@ index.js has become e2e.ts in the UI but in cypress > .bin in node_modules its i
 its easy to add them in javascript since inside e2e.js, commands.js is already there.
 But to add the custom commands in typescript is challenging one. Hence I had reconfigured this project in fully typescript mode.
 
+write custom commands inside commands.ts and also declare their namespace there itself.
+import the commands.ts file inside e2e.ts
+
 _________________________________________________
 GIT COMMANDS USED:
 _________________________________________________
