@@ -72,6 +72,7 @@ Cypress.Commands.add('countMenus', { prevSubject: 'element' }, (subject, options
 
 // dual commands: can be used with or without a parent
 // Custom command to log a message with a customizable prefix
+// used options here as second parameter
 Cypress.Commands.add('logWithPrefix', { prevSubject: 'optional' }, (subject, options) => {
   const prefix = options && options.prefix ? options.prefix : 'Default';
   const suffix = options && options.suffix ? options.suffix : 'Default';
@@ -79,9 +80,6 @@ Cypress.Commands.add('logWithPrefix', { prevSubject: 'optional' }, (subject, opt
   const message = subject?`Subject: ${subject}, Prefix: ${prefix} , Suffix: ${suffix}`: `No subject, Prefix: ${prefix}, Suffix: ${suffix}`;
 
   cy.log(message);
-
-  // Returning the log message for further use if needed
-  return message;
 });
 
 

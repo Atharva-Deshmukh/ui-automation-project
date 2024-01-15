@@ -54,6 +54,17 @@ write custom commands inside commands.ts and also declare their namespace there 
 import the commands.ts file inside e2e.ts
 
 _________________________________________________
+SET UP A SINGLE SESSION STORAGE FIRST
+
+Cypress automatically clears the local storage, session storage, and cookies between each test (each it block). This behavior is intentional and helps maintain a clean and isolated environment for each test, preventing any potential interference or state contamination between tests.
+
+WAYS TO DEAL WITH IT:
+
+-> use { testIsolation: false } inside describe to make all test cases non-independent
+-> create manually a single session and then clear that session
+_________________________________________________
+
+_________________________________________________
 GIT COMMANDS USED:
 _________________________________________________
 > to delete an existing remote: **git remote rm origin**
