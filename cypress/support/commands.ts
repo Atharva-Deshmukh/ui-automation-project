@@ -49,9 +49,28 @@ declare global {
   }
 }
 
+/**
+ export function loginWithUserGoToSite(username, sitename) {
+  cy.log("login with " + username + " and Open site " + sitename)
+  cy.session([username, Cypress.env('ECODOMUS_ADMIN_PASSWORD')], () => {
+    //login with username
+    loginToEcodomus(username)
+    //validate Site is present
+    goToSites()
+    if (sitename != "") {
+      siteSearch().clear().type(sitename + '{enter}')
+      loadingImgWait().should("not.exist")
+      searchResultTable().contains(sitename).click()
+    }
+  })
+}
+ */
+
 // parent commands: can directly used with cy...
 Cypress.Commands.add('loginTargetSite', (targetSite: string, username: string, password: string) => {
-    login(targetSite, username, password);
+    cy.session({username, password}, () => {
+      login(targetSite, username, password);
+    });
 });
 
 Cypress.Commands.add('logoutTargetSite', () => {
