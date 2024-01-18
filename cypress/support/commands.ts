@@ -35,7 +35,7 @@
 //     }
 //   }
 // }
-import { login, logout } from "./loginHelper";
+import { login, logout } from "./login_helper";
 import 'cypress-wait-until';
 
 declare global {
@@ -68,9 +68,7 @@ declare global {
 
 // parent commands: can directly used with cy...
 Cypress.Commands.add('loginTargetSite', (targetSite: string, username: string, password: string) => {
-    cy.session({username, password}, () => {
-      login(targetSite, username, password);
-    });
+    login(targetSite, username, password);
 });
 
 Cypress.Commands.add('logoutTargetSite', () => {

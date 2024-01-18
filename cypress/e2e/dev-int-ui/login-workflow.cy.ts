@@ -1,4 +1,4 @@
-import { login, logout } from "../../support/loginHelper";
+import { login, logout } from "../../support/login_helper";
 
 describe("Workflow to test login logout using various ways", () => {
   it("login logout using normal helper functions", () => {
