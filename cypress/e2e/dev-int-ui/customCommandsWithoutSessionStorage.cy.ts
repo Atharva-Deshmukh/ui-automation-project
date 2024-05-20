@@ -1,4 +1,4 @@
-describe('Custom command workflow for child command and dual command WITH NON-ISOLATED TEST CASES (it blocks)', { testIsolation: false }, () => {
+describe('Custom command workflow for child command and dual command WITH NON-ISOLATED TEST CASES (it blocks)', () => {
     before(() => {
         // ensure clean test slate for these tests
         // clears sessionsstorage, localstorage and cookies

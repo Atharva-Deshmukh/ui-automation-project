@@ -60,7 +60,7 @@ Cypress automatically clears the local storage, session storage, and cookies bet
 
 WAYS TO DEAL WITH IT:
 
--> use { testIsolation: false } inside describe to make all test cases non-independent
+-> use { testIsolation: false } inside describe OR in cypress.config.ts to make all test cases non-independent
 -> create manually a single session and then clear that session
 _________________________________________________
 
