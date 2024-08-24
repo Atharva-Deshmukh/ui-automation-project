@@ -7,7 +7,9 @@ describe('Testing environment workflow', () => {
         );
     });
 
-    it('if the user can log the secret environment variable', () => {
+    it('Verify if the user can log the secret environment variable', () => {
+
+// COMMAND RUN IN BASH -> CYPRESS_SECRET_1=Atharva CYPRESS_SECRET_2=Deshmukh yarn run cypress open
         cy.log(Cypress.env('SECRET_1'));
         cy.log(Cypress.env('SECRET_2'));
     });
