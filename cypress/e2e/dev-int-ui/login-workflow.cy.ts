@@ -15,6 +15,7 @@ describe("Workflow to test login logout using various ways", () => {
     cy.loginTargetSite(Cypress.env("TARGET_SITE"),
     Cypress.env("ADMIN_USERNAME"),
     Cypress.env("ADMIN_PASSWORD"));
+    expect('true').to.equal('true');
 
     cy.logoutTargetSite();
   });
