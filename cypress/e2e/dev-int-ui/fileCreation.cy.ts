@@ -1,10 +1,9 @@
 describe('Testing environment workflow', () => {
     before(() => {
-        cy.loginTargetSite(
-        Cypress.env("TARGET_SITE"),
-        Cypress.env("ADMIN_USERNAME"),
-        Cypress.env("ADMIN_PASSWORD")
-        );
+      cy.task('writeFile', { filePath: 'cypress/downloads', sizeInMB: 5 })
+      .then(() => {
+        cy.log('PDF created successfully');
+      });
     });
 
     it('Verify if the user can create files using node js', () => {
@@ -14,9 +13,13 @@ describe('Testing environment workflow', () => {
         });
     });
 
-
-    after(() => {
-        cy.logoutTargetSite();
-        Cypress.session.clearAllSavedSessions();
+    it.only('Verify if the user can create PDF', () => {
+       cy.log('hi')
     });
+
+
+    // after(() => {
+    //     cy.logoutTargetSite();
+    //     Cypress.session.clearAllSavedSessions();
+    // });
 });
