@@ -53,6 +53,13 @@
   dependencies:
     undici-types "~5.26.4"
 
+"@types/pdfkit@^0.11.5":
+  version "0.13.8"
+  resolved "https://registry.yarnpkg.com/@types/pdfkit/-/pdfkit-0.13.8.tgz#56847c021d51c66f20f32a5265effbf2324cdf3f"
+  integrity sha512-lX+wmG9KNisFQXCC/facEw+rljSkMyo6Eh+W4gp/uPZzzmA7TTchKkCp5tMrXDY+lQjqzoxt8rGKRlpxf1c3hw==
+  dependencies:
+    "@types/node" "*"
+
 "@types/sinonjs__fake-timers@8.1.1":
   version "8.1.1"
   resolved "https://registry.npmjs.org/@types/sinonjs__fake-timers/-/sinonjs__fake-timers-8.1.1.tgz"
