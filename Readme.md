@@ -1,80 +1,117 @@
-Using Cypress tool. Cypress is fully configured in typescript
+Here’s your fully formatted and structured `README.md` file with all details preserved:
 
-_________________________________________________
-HOW CYPRESS WAS SET UP FULLY IN TYPESCRIPT IN THIS REPO:
-_________________________________________________
-> Create **package.json** using **yarn init** and configure it
+```markdown
+# Using Cypress Tool (Fully Configured in TypeScript)
 
-> Install **node modules** and cypress + typescript at a time  using **yarn add -D cypress typescript**
+This project utilizes Cypress, which has been fully configured in **TypeScript**.
 
-> create a **tsconfig.json** file and copy the content from cypress.io
+---
 
-> Till now cypress is not configured although installed.
+## How Cypress Was Set Up Fully in TypeScript in This Repo:
 
-> run **yarn cypress open --e2e**  and you will see all cypress built in configurations in .ts extensions only.
+1. **Create `package.json`**:
+   - Use `yarn init` and configure it.
 
-> click on continue and all configuration files with .ts extension will be added inside cypress folder
+2. **Install dependencies**:
+   - Install Cypress and TypeScript along with other **node modules** using:  
+     `yarn add -D cypress typescript`.
 
-> There is no downloads folder by default anywhere, it will be created when something will be downloaded 
+3. **Set up TypeScript**:
+   - Create a `tsconfig.json` file and copy the content from Cypress's documentation.
 
-> Command to run cypress: **yarn run cypress open**
+4. **Initialize Cypress**:
+   - Run `yarn cypress open --e2e` to start Cypress.  
+   - All built-in configurations will appear with `.ts` extensions.  
+   - Click on **Continue**, and configuration files with `.ts` extensions will be added inside the `cypress` folder.
 
-> Cypress will not be configured initially, click on e2e and all the files like e2e, examples, etc will be set up under cypress folder
+5. **Downloads folder**:
+   - A downloads folder is not created by default. It will be generated only when a file is downloaded.
 
-> There are no specs initially hence click on scaffold specs options, e2e is created automatically with pre written specs
+6. **Run Cypress**:
+   - Use the command: `yarn run cypress open`.
 
-> **touch cypress.env.json** to create an **cypress.env.json** file to use Cypress.env()
+7. **E2E Configuration**:
+   - Initially, Cypress will not be configured.  
+     Click on **E2E**, and all files like `e2e`, `examples`, etc., will be set up under the `cypress` folder.  
+   - No specs will exist initially. Click on **Scaffold Specs** to automatically create pre-written specs under `e2e`.
 
-> make changes in **package.json** >>**scripts** files to open cypress for specific folders in CI/CD headless mode.
+8. **Create `cypress.env.json`**:
+   - Use `touch cypress.env.json` to create a `cypress.env.json` file to utilize `Cypress.env()`.
 
-> Note that spaces are not allowed inside scripts {} in package.json
+9. **Modify `package.json`**:
+   - Update the **scripts** section to open Cypress for specific folders in CI/CD headless mode.  
+     - Ensure no spaces exist inside `scripts {}` in `package.json`.
+     - Use `yarn run` before any keys inside `scripts`.
 
-> use **yarn run** before any keys inside scripts
+10. **Use Cypress commands directly**:
+    - It's better to use Cypress commands directly instead of relying on script shortcuts. This helps in memorizing commands through frequent use.
 
-> its better to directly use cypress commands instead of ones in script in order to memorise them by frequent uses
+---
 
-_________________________________________________
-ADDING WaitUntil()
-_________________________________________________
-**yarn add --dev cypress-wait-until**
-add **import 'cypress-wait-until';** in commands.ts
+## Adding `WaitUntil`
 
-format of this function must be correct while using it.
-cy.waitUntil(() => someLocator, commonTimeout);
+1. Install the package:  
+   `yarn add --dev cypress-wait-until`.
 
-_________________________________________________
-ADDING CUSTOM COMMANDS:
-_________________________________________________
-index.js has become e2e.ts in the UI but in cypress > .bin in node_modules its index.js only
+2. Add the following import in `commands.ts`:  
+   `import 'cypress-wait-until';`.
 
-its easy to add them in javascript since inside e2e.js, commands.js is already there.
-But to add the custom commands in typescript is challenging one. Hence I had reconfigured this project in fully typescript mode.
+3. Correct usage format:  
+   `cy.waitUntil(() => someLocator, commonTimeout);`.
 
-write custom commands inside commands.ts and also declare their namespace there itself.
-import the commands.ts file inside e2e.ts
+---
 
-_________________________________________________
-SET UP A SINGLE SESSION STORAGE FIRST
+## Adding Custom Commands
 
-Cypress automatically clears the local storage, session storage, and cookies between each test (each it block). This behavior is intentional and helps maintain a clean and isolated environment for each test, preventing any potential interference or state contamination between tests.
+1. File structure changes:  
+   - In the UI, `index.js` becomes `e2e.ts`.  
+   - However, in `cypress > .bin` inside `node_modules`, it remains `index.js`.
 
-WAYS TO DEAL WITH IT:
+2. Adding commands in TypeScript:  
+   - Write custom commands inside `commands.ts` and declare their namespace there.  
+   - Import the `commands.ts` file inside `e2e.ts`.
 
--> use { testIsolation: false } inside describe OR in cypress.config.ts to make all test cases non-independent
--> create manually a single session and then clear that session
-_________________________________________________
+---
 
-_________________________________________________
-GIT COMMANDS USED:
-_________________________________________________
-> to delete an existing remote: **git remote rm origin**
-> to add remote: **git remote add origin LOGIN_URL**
-> usually gitignore prevents tracking node modules but I created gitIgnore after pushing node modules, hence I must clear git cache using **git rm -r --cached node_modules**
-> **git merge --allow-unrelated-histories origin/master** to merge branches with no common ancestors
-> **git push origin --delete branch_name** to delete any remote branch 
-_________________________________________________
-REGARDING SSH KEY
-_________________________________________________
-> **ssh-keygen -t ed25519** inside command prompt to generate ssh key
+## Set Up a Single Session Storage
 
-> ssh key should be inside users/.ssh ONLY while pushing the code. THIS same ssh keys can be added to other repositories on gitlab and github as well and this key is REUSED.
+By default, Cypress automatically clears local storage, session storage, and cookies between each test (`it` block).  
+This behavior ensures a clean and isolated environment for each test.
+
+### Ways to Manage Session Storage:
+- Use `{ testIsolation: false }` inside `describe` or in `cypress.config.ts` to make all test cases non-independent.
+- Manually create a single session and then clear it as needed.
+
+---
+
+## Git Commands Used
+
+1. **Delete an existing remote**:  
+   `git remote rm origin`.
+
+2. **Add a remote**:  
+   `git remote add origin LOGIN_URL`.
+
+3. **Handle `node_modules` and `.gitignore` issues**:  
+   - If `.gitignore` is created after pushing `node_modules`, clear the Git cache:  
+     `git rm -r --cached node_modules`.
+
+4. **Merge branches with no common ancestors**:  
+   `git merge --allow-unrelated-histories origin/master`.
+
+5. **Delete a remote branch**:  
+   `git push origin --delete branch_name`.
+
+---
+
+## Regarding SSH Key
+
+1. Generate an SSH key:  
+   `ssh-keygen -t ed25519` (run in the command prompt).
+
+2. Placement:  
+   - The SSH key should reside in `users/.ssh` when pushing code.  
+   - This same key can be reused across other repositories on GitLab and GitHub.
+
+---
+```
