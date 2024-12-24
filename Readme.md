@@ -1,6 +1,3 @@
-Here’s your fully formatted and structured `README.md` file with all details preserved:
-
-```markdown
 # Using Cypress Tool (Fully Configured in TypeScript)
 
 This project utilizes Cypress, which has been fully configured in **TypeScript**.
@@ -114,4 +111,3 @@ This behavior ensures a clean and isolated environment for each test.
    - This same key can be reused across other repositories on GitLab and GitHub.
 
 ---
-```
