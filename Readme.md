@@ -1,7 +1,9 @@
 # Using Cypress Tool (Fully Configured in TypeScript)
-
-![Cypress Logo](https://www.cypress.io/img/logo.png)
-![TypeScript Logo](https://raw.githubusercontent.com/remojansen/logo.ts/master/ts.png)
+<div align="center">
+  <img src="https://docs.cypress.io/img/logo/cypress-logo-circle-dark.png" alt="Cypress Logo" width="120" height="120"/>
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/remojansen/logo.ts/master/ts.png" alt="TypeScript Logo" width="120" height="120"/>
+</div>
 
 This project utilizes Cypress, which has been fully configured in **TypeScript**.
 
