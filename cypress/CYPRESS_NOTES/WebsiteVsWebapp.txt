@@ -1,0 +1,8 @@
+                                            Website vs WebApp:
+
+Website:
+Content-Oriented: Wikipedia, news websites like BBC or CNN.
+
+Web App:
+Task-Oriented: Google Drive (document editing), Facebook and LinkedIn (social networking), 
+Amazon (e-commerce platform).

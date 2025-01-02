@@ -1,0 +1,13 @@
+Cookies in cypress
+Reports adding in cypress
+how to integrate cypress with gitlab
+mocking APIs, custom commands, and parallel test execution,
+Iframes
+Shadow DOM
+Sheets iterations
+Pdf viewing
+Xpath and locators
+Session storage local storage and clearing with each test case.
+Flaky tests
+Configs Files in cypress
+APIs

@@ -1,0 +1,41 @@
+                            Handling Flaky tests in cypress:
+
+- Wait for the API calls also, since they cause the backend to remain updated (like XHR in model viewer)
+  We can use intercept: cy.intercept(‘POST’, /url regex/).as.(intercepted)
+                                    cy.get().click()
+                                    cy.wait(@intercepted)
+- {timeout}
+- Sometimes, chained queries and then sudden assertion also results in lag of loading and it can 
+  fail tests, use some waiting assertions and then proceed
+- Ex: cy.get() // query
+       .its()     // query
+       .then()  // assertion
+
+  Ex: cy.get() // query
+       .its()     // query
+       .should(‘not.include.text’, ‘loading’)
+       .then(cy.wrap)  // assertion
+
+
+
+- For Iframes, sometimes top iframes cannot access inner iframes due to difference in domains, 
+  so in config, set chromeWebSecurity = false
+- Use additional assertions: 
+  Ex: cy.select(‘option’).should(‘have.value’, ‘option’);
+- If we are using jquery to store element for some time, may be sometimes that element is not preserved
+    Ex: cy.get().then(($ele) => {
+    Ops
+    Ops
+    Ops
+    Ops
+    $ele.click();   // sometimes, $ele is not preserved for this much time, so store it in alias, since alias will requery it if it doesn’t get the value
+    })
+
+    cy.get().as(‘alias’)
+    cy.get(@alias).then(($ele) => {
+    cy.get().as(‘alias’)
+    Ops
+    Ops
+    Ops
+    cy.get(@alias).click();  
+    })
