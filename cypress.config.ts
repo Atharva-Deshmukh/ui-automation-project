@@ -77,6 +77,9 @@ export default defineConfig({
       
     },
   },
+  env: {
+    hideXHRInCommandLog: true,
+  }
 });
 
 

@@ -37,6 +37,7 @@
 // }
 import { login, logout } from "./login_helper";
 import 'cypress-wait-until';
+import '@4tw/cypress-drag-drop';
 
 declare global {
   namespace Cypress {
