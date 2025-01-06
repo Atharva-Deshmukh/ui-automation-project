@@ -1,3 +1,7 @@
+TABLE OF CONTENTS: https://docs.cypress.io/api/table-of-contents
+
+
+Drag and drop
 Cookies in cypress
 Reports adding in cypress
 how to integrate cypress with gitlab
