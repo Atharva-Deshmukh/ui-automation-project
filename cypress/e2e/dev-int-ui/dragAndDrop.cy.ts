@@ -36,4 +36,8 @@ describe('Drag and drop in cypress', () => {
         // cy.get(sourceId).move({ deltaX: 800, deltaY: -10 }); // can use this also
     });
 
+    // it('Without plugin', () => {
+
+    // });
+
 });
