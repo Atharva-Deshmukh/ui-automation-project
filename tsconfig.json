@@ -4,6 +4,7 @@
       "lib": ["es6", "dom"],
       "types": ["cypress", "@4tw/cypress-drag-drop"],
       "moduleResolution": "node",     // Use Node.js module resolution
+      "moduleDetection": "force", // every file is treated as separete
     },
     "include": ["**/*.ts"]
 }
