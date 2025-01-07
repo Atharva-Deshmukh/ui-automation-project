@@ -1,6 +1,7 @@
 TABLE OF CONTENTS: https://docs.cypress.io/api/table-of-contents
 
 
+how to run different environments in cypress
 Drag and drop
 Cookies in cypress
 Reports adding in cypress
