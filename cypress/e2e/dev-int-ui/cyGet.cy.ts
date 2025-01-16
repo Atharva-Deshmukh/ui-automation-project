@@ -80,7 +80,7 @@ describe('cy.get() workflows', () => {
         });
     });
 
-    it.only("getting repeated elements", () => {
+    it("getting repeated elements", () => {
         cy.visit('http://127.0.0.1:5500/DOM.html').then(() => {
             cy.get('#message-container', {timeout: 60000}).should('be.visible');
 
@@ -110,7 +110,7 @@ describe('cy.get() workflows', () => {
         });
     });
 
-    it("cy.get() vs cy.find()", () => {
+    it.only("cy.get() vs cy.find()", () => {
         cy.visit('http://127.0.0.1:5500/DOM.html').then(() => {
             cy.get('#message-container', {timeout: 60000}).should('be.visible');
 
@@ -171,7 +171,15 @@ describe('cy.get() workflows', () => {
                     selector: 'div',
                     __proto__: Object.prototype
                     }; */
+
+                    // we can navigate at any level using get()
+                    cy.wrap($ele).get('#div-1').should('be.visible');
             });
+
+            // find() will always start from the current element and will stop immediately after found
+            cy.get('#div-2', {timeout: 60000}).find('div').should('have.length', 1).and('have.id', 'div-3'); 
+
+
         });
     });
 });
