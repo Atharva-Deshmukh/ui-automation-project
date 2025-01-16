@@ -58,7 +58,7 @@ describe('cy.get() workflows', () => {
     
     */
 
-    it.only("getting element that contains CSS like elements like '.' and ':' ", () => {
+    it("getting element that contains CSS like elements like '.' and ':' ", () => {
         cy.visit('http://127.0.0.1:5500/DOM.html').then(() => {
             cy.get('#message-container', {timeout: 60000}).should('be.visible');
 
@@ -77,6 +77,35 @@ describe('cy.get() workflows', () => {
             cy.get('#message\\:\\:container', {timeout: 60000}).should('be.visible'); 
             /*assert expected <div#message::container> to be visible */
             
+        });
+    });
+
+    it.only("getting repeated elements", () => {
+        cy.visit('http://127.0.0.1:5500/DOM.html').then(() => {
+            cy.get('#message-container', {timeout: 60000}).should('be.visible');
+
+            cy.get('p', {timeout: 60000}).should('be.visible').then(($ele) => {
+                console.log($ele) 
+                /* a complex object of cypress's own wrapped jquery is logged
+
+                This object helps cypress to chain commands
+
+                const jqueryObject = {
+                    0: 'p#message1',
+                    1: 'p#message2',
+                    length: 2,
+                    prevObject: {
+                        0: 'document',
+                        length: 1,
+                        selector: '',
+                        __proto__: Object.prototype
+                    },
+                    selector: 'p',
+                    __proto__: Object.prototype
+                    }; */
+
+                    expect($ele).to.have.length(2); // indicates two matches
+            });
         });
     });
 });
