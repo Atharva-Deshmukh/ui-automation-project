@@ -5,3 +5,5 @@ jquery methods
 contains()
 filter()
 not()
+
+Cypress API >> browsers
