@@ -84,7 +84,7 @@ describe('cy.get() workflows', () => {
         cy.visit('http://127.0.0.1:5500/DOM.html').then(() => {
             cy.get('#message-container', {timeout: 60000}).should('be.visible');
 
-            cy.get('p', {timeout: 60000}).should('be.visible').then(($ele) => {
+            cy.get('#message-container p', {timeout: 60000}).should('be.visible').then(($ele) => {
                 console.log($ele) 
                 /* a complex object of cypress's own wrapped jquery is logged
 
@@ -105,6 +105,72 @@ describe('cy.get() workflows', () => {
                     }; */
 
                     expect($ele).to.have.length(2); // indicates two matches
+                    expect($ele.length).to.eq(2); // indicates two matches
+            });
+        });
+    });
+
+    it("cy.get() vs cy.find()", () => {
+        cy.visit('http://127.0.0.1:5500/DOM.html').then(() => {
+            cy.get('#message-container', {timeout: 60000}).should('be.visible');
+
+            /* The cy.get command always starts its search from the cy.root element (<html> of documents object)
+            unless used inside the .within() command, where scope starts from within that selector. 
+            
+            The .find command starts its search from the current subject itself 
+            
+            DOM used:
+
+            <body>
+                    <div id="message-container">
+                        <p id="message1">Message Container - 1</p>
+                        <p id="message2">Message Container - 2</p>
+                    </div>
+
+                    <div id="div-1">
+                        <p id="mess1">inside div: 1</p>
+                        <div id="div-2" class="AD">
+                            <p id="mess2">inside div: 2</p>
+                            <div id="div-3">
+                                <p id="mess3">inside div: 3</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="message....container">
+                        Contains ...
+                    </div>
+
+                    <div id="message::container">
+                        Contains ::
+                    </div>
+            </body>
+            
+            */
+
+            // get find all divs starting from the root element.
+            cy.get('#mess2', {timeout: 60000}).get('div').should('have.length', 6); 
+            cy.get('#mess2', {timeout: 60000}).get('div').then(($ele) => {
+                console.warn('ELES -> ', $ele);
+
+                /* Jquery object:
+                const jqueryObject = {
+                    0: 'div#message-container',
+                    1: 'div#div-1',
+                    2: 'div#div-2.AD',
+                    3: 'div#div-3',
+                    4: 'div#message....container',
+                    5: 'div#message::container',
+                    length: 6,
+                    prevObject: {
+                        0: 'document',
+                        length: 1,
+                        selector: '',
+                        __proto__: Object.prototype
+                    },
+                    selector: 'div',
+                    __proto__: Object.prototype
+                    }; */
             });
         });
     });
