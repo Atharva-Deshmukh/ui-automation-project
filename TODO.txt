@@ -1,0 +1,7 @@
+.then()
+.within()
+
+jquery methods
+contains()
+filter()
+not()
