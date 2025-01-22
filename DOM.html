@@ -22,7 +22,20 @@
       <p id="mess2">inside div: 2</p>
       <div id="div-3">
         <p id="mess3">inside div: 3</p>
+        <button id="button-3">ClickMe</button>
      </div>
+     <script>
+      // Add an onclick event to the button
+      document.getElementById('button-3').onclick = function () {
+        // Get the parent div
+        const div = document.getElementById('div-3');
+    
+        // Add a custom property or update the content
+        div.setAttribute('data-clicked', 'true'); // Adds a property
+        const message = document.getElementById('mess3');
+        message.textContent = 'The button was clicked!'; // Updates the content
+      };
+    </script>
     </div>
   </div>
 
