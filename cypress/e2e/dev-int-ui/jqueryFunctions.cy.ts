@@ -176,7 +176,7 @@ describe('Workflow for cypress jquery functions', () => {
     });
 
     /* The $ele.css() */
-    describe.only('$ele.css()', () => {
+    describe('$ele.css()', () => {
         before(() => {
             cy.visit('https://www.automationexercise.com/', { timeout: 60000 });
         });
@@ -187,7 +187,129 @@ describe('Workflow for cypress jquery functions', () => {
                 expect( $ele.css('color')).to.eq('rgb(255, 165, 0)');
             });
         }) 
+    });
+
+    /* The $ele.attr() 
+       the cypress invoke() uses attr() of Jquery internally */
+    describe('$ele.attr()', () => {
+        before(() => {
+            cy.visit('http://127.0.0.1:5500/INPUTS_DOM.html', { timeout: 60000 });
         });
+
+        /* DOM USED: 
+
+            <br>
+            <h1>DISABLE THIS BUTTON</h1> 
+            <button id="btn">DisableMe</button>
+            <br>
+            <br>
+            <input type="text" id="username" name="username" value="AD" placeholder="AD"> <br>
+            <input type="password" id="password" name="password" value="12345"> <br>
+            <input type="checkbox" id="subscribe" name="subscribe" value="yes" checked> <br>
+            <input type="radio" id="option1" name="choice" value="A" checked> <br>
+            <input type="radio" id="option2" name="choice" value="B"> <br>
+            <textarea id="comments" name="comments">TEXT AREA</textarea> <br>
+            <select id="colors" name="colors"> 
+                <option value="red">Red</option>
+                <option value="blue" selected>Blue</option>
+                <option value="green">Green</option>
+            </select> */
+
+        it('Simply get and validate the attribute using attr() or invoke()', () => {
+            cy.get('#username', { timeout: 60000 }).should('be.visible').then(($ele) => {
+                expect($ele.attr('placeholder')).to.eq('AD');
+            });
+            cy.get('#username', { timeout: 60000 }).should('be.visible').invoke('attr', 'placeholder').then((value) => {
+                expect(value).to.eq('AD');
+            });
         });
+
+           /* Incorrect code:
+             cy.get('#btn', { timeout: 60000 }).should('be.visible').then(($btn) => {
+                $btn.attr('disabled', 'true');
+                expect($btn.attr('disabled')).to.eq('AD');
+            });
+
+            $btn.attr('disabled', 'true') modifies the DOM directly via jQuery, but Cypress won't be aware of 
+            this change. Cypress operates asynchronously and uses its internal command queue to track changes, 
+            so it’s better to use Cypress commands for consistency.
+
+                                                        IMPORTANT CONCEPT
+            
+
+                        HTML Attribute                             DOM Property
+                        ---------------------------------------------------------------
+                        Reflects the initial state of an element   Represents the current state of the 
+                        in the HTML.                              element in the DOM.
+
+                        Static unless explicitly changed.         Dynamic and reflects runtime changes.
+
+                        Managed by .attr().                       Managed by .prop().
+
+                        Example:                                  Example:
+                        <input type="checkbox" checked>           document.querySelector('#checkbox').checked
+
+            Boolean attributes like disabled, checked, and readonly are unique because their presence or 
+            absence in HTML determines their effect, rather than their value.
+
+            .attr('disabled', 'true'):
+            Adds the disabled attribute with the string 'true' as its value.
+            Some browsers may not interpret this correctly as a boolean value for runtime behavior.
+
+            .prop('disabled', true'):
+            Directly sets the disabled property to true, ensuring the element behaves as disabled.
+            This is more reliable since properties are tied to the element's actual functionality in the DOM.
+
+            Ex:
+            A checkbox <input type="checkbox" checked>:
+            attr('checked'): Reflects the initial state defined in HTML.
+            prop('checked'): Reflects whether the checkbox is currently checked in the DOM.
+
+
+                                When to Use .attr() vs. .prop()
+
+            The .prop() method is specifically necessary for boolean attributes or properties 
+            that reflect the element's current interactive state.
+
+            The .attr() method works for all types of attributes, but for boolean attributes, 
+            its behavior might not directly impact the element’s functional state.
+            Use .attr() for setting or getting static attributes like id, name, src, href, etc.
+            
+            */
+
+        it('Modify the attribute dynamically using attr()', () => {
+            //  the <button> element will gain the disabled attribute even if it doesn't have it originally.
+            // Id is a static property and it can be updated by
+            cy.get('#btn', { timeout: 60000 }).should('be.visible').then(($btn) => {
+                $btn.attr('id', '#updated');
+                expect($btn.attr('id')).to.eq('#updated');  // <button id="#updated">DisableMe</button>
+            });
+        });
+
+        it('Why modifing of boolean values do not work with attr()', () => {
+            // Using .attr()
+            cy.get('#subscribe').then(($ele) => {
+                console.log($ele.attr('checked')); // Logs "checked" (HTML attribute)
+                console.log($ele.prop('checked')); // Logs true (DOM property)
+            });
+            
+            // Unchecking the checkbox dynamically
+            cy.get('#subscribe').uncheck();
+            
+            // After unchecking:
+            cy.get('#subscribe').then(($ele) => {
+                console.log($ele.attr('checked')); // Still logs "checked" since it is static initial attribute
+                console.log($ele.prop('checked')); // Logs false (dynamic property)
+            });
+        });
+
+        it('using invoke() to modify values and verify', () => {
+            cy.get('#option1', { timeout: 60000 }).should('be.visible').invoke('attr', 'value', 'UPDATED');
+            cy.get('#option1', { timeout: 60000 }).should('be.visible').invoke('attr', 'value').should('equal', 'UPDATED');
+        });
+    });
+
+
+});
         
 
