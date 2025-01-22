@@ -318,7 +318,7 @@ describe('Workflow for cypress jquery functions', () => {
 
     Ex Properties: checked, disabled, value, readonly, required, etc.
     */
-    describe.only('$ele.prop()', () => {
+    describe('$ele.prop()', () => {
         before(() => {
             cy.visit('http://127.0.0.1:5500/INPUTS_DOM.html', { timeout: 60000 });
         });
@@ -342,6 +342,22 @@ describe('Workflow for cypress jquery functions', () => {
         });
     });
 
+    /* The $ele.find() */
+    describe('$ele.find()', () => {
+        before(() => {
+            cy.visit('http://127.0.0.1:5500/DOM.html', { timeout: 60000 });
+        });
+
+        it('various scenarios with $ele.find()', () => {
+            cy.get('#div-1').then(($ele) => {
+                expect($ele.find('#mess3').text()).to.equal('inside div: 3')
+            });
+
+            cy.get('#div-3').then(($ele) => {
+                $ele.find('#button-3').click();
+            });
+        }) 
+    });
 
 });
         
