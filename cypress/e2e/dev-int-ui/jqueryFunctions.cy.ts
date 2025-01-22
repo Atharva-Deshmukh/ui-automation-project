@@ -48,6 +48,8 @@ $ele.text() includes all descendant text nodes but does not return HTML tags or 
 
 */
 
+import * as exp from "constants";
+
 describe('Workflow for cypress jquery functions', () => {
 
     /* For elements like <div>, <span>, or <p>, which contain text but not a value attribute, 
@@ -306,6 +308,37 @@ describe('Workflow for cypress jquery functions', () => {
         it('using invoke() to modify values and verify', () => {
             cy.get('#option1', { timeout: 60000 }).should('be.visible').invoke('attr', 'value', 'UPDATED');
             cy.get('#option1', { timeout: 60000 }).should('be.visible').invoke('attr', 'value').should('equal', 'UPDATED');
+        });
+    });
+
+    /* The $ele.prop() 
+    allows you to get or set properties of DOM elements. When used with Cypress, it provides 
+    direct access to the underlying DOM element(s) returned by a selector, enabling you to 
+    interact with properties of those elements. 
+
+    Ex Properties: checked, disabled, value, readonly, required, etc.
+    */
+    describe.only('$ele.prop()', () => {
+        before(() => {
+            cy.visit('http://127.0.0.1:5500/INPUTS_DOM.html', { timeout: 60000 });
+        });
+
+        it('get latest element properties at the run time', () => {
+            cy.get('#password', { timeout: 60000 }).should('be.visible').then(($ele) => {
+                expect($ele.prop('name')).to.eq('password');
+                expect($ele.prop('value')).to.eq('12345');
+                expect($ele.prop('type')).to.eq('password');
+            });
+        });
+
+        it('set element properties at the run time', () => {
+            cy.get('#subscribe', { timeout: 60000 }).should('be.visible').then(($ele) => {
+                expect($ele.prop('checked')).to.be.true;
+                $ele.prop('checked', false);
+                expect($ele.prop('checked')).to.be.false;
+                $ele.prop('type', 'radio');
+                expect($ele.prop('type')).to.eq('radio');
+            });
         });
     });
 
