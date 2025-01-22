@@ -123,7 +123,7 @@ describe('Workflow for cypress jquery functions', () => {
         <select> elements
         It does not work for non-input elements such as <div>, <span>, or other HTML elements that do not 
         have a value attribute. */
-    describe.only('$ele.val()', () => {
+    describe('$ele.val()', () => {
         before(() => {
             cy.visit('http://127.0.0.1:5500/INPUTS_DOM.html', { timeout: 60000 });
         });
@@ -175,4 +175,19 @@ describe('Workflow for cypress jquery functions', () => {
         });
     });
 
-});
+    /* The $ele.css() */
+    describe.only('$ele.css()', () => {
+        before(() => {
+            cy.visit('https://www.automationexercise.com/', { timeout: 60000 });
+        });
+
+        it('check css background color', () => {
+            cy.get('a:contains(" Home")', { timeout: 60000 }).should('be.visible').invoke('css', 'color').should('equal', 'rgb(255, 165, 0)')
+            cy.get('a:contains(" Home")', { timeout: 60000 }).should('be.visible').then(($ele) => {
+                expect( $ele.css('color')).to.eq('rgb(255, 165, 0)');
+            });
+        }) 
+        });
+        });
+        
+
