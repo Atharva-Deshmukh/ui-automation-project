@@ -67,6 +67,11 @@ describe('cy.find() workflows', () => {
                     </div>
                 </div>
 
+
+  the .find('> p') part looks for all <p> elements that are direct children of the #message-container element.
+  The > symbol is a child combinator in CSS, so it selects only the <p> elements that are immediate children 
+  of #message-container, not descendants that are deeper in the DOM.
+
                 */
                 cy.get('#message-container', {timeout: 60000}).should('be.visible').find('>p').should('have.length', 2)
             });
