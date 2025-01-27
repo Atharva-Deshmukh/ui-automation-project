@@ -4,9 +4,7 @@ Arguments: (value, index, collection)
 
 No matter what is returned in the callback function, .each() will always yield the original array.
 
-You can stop the .each() loop early by returning false in the callback function.
-
-*/
+You can stop the .each() loop early by returning false in the callback function. */
 describe('cy.each() Workflow', () => {   
     it('Get Cypress spec', () => {
         cy.visit('http://127.0.0.1:5500/DOM-2.html').then(() => {
@@ -56,4 +54,72 @@ describe('cy.each() Workflow', () => {
             })
           })
     });
+});
+
+/* DOM Used
+<div class="iteration">
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+</div>  
+
+There are 16 buttons
+after clicking each button, a random number between 0, 10 is displayed in next element sibling after
+3 seconds
+*/
+
+
+describe.only('Gleb Bahmutav playlist - Advanced cy.each() workflow', () => {   
+  it('Click on every button and then log that number, also check if it is between [0-10]', () => {
+      cy.visit('http://127.0.0.1:5500/Buttons16.html').then(() => {
+          cy.get('button', {timeout: 60000}).should('be.visible');
+
+          /* The custom .should() waits until the text inside the <p> element is no longer empty. 
+          It will keep retrying every few milliseconds (Cypress automatically does this) until the 
+          text is available. */
+
+          cy.get('.button-wrapper button', {timeout: 60000}).each(($btn) => {
+            cy.wrap($btn)
+            .click()
+            .parent()
+            .find('p')
+            .should(($p) => {   // wait dynamically untill the text is displayed
+              const text = $p.text().trim(); // Wait until the text is no longer empty
+              expect(text).to.not.be.empty; // Wait for text to be non-empty
+            })
+            .invoke('text').then((digit) => {
+              cy.log('DIGIT LOGGED -> ', digit);
+              expect(Number(digit)).to.be.within(0, 10);
+            });
+          });
+
+    });
+  });
 });
