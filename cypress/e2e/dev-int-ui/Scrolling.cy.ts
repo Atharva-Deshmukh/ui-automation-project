@@ -1,4 +1,3 @@
-// horscroll  a:contains Work
 describe('scrollIntoView()', () => {
 
     it('Scroll element at the bottom', () => {
