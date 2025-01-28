@@ -359,6 +359,53 @@ describe('Workflow for cypress jquery functions', () => {
         }) 
     });
 
+    /* The $ele.map() 
+    
+    1. .map():
+        The .map() method in jQuery is used to iterate over a set of elements and transform 
+        each element into something new (e.g., its text, attribute, or a calculation).
+        It returns a jQuery object, so if you need a plain JavaScript array, 
+        you'll often combine .map() with .get().
+    
+    2. .get():
+        The .get() method converts the jQuery object (returned by .map()) into a plain JavaScript array.
+        Without .get(), .map() results in a jQuery collection.
+    
+    */
+    describe.only('$ele.map()', () => {
+        before(() => {
+            cy.visit('http://127.0.0.1:5500/DOM-2.html', { timeout: 60000 });
+        });
+
+        /* DOM used
+        
+          <div id="message-container">
+            <p id="message1">MC - 1</p>
+            <p id="message2">MC - 2</p>
+            <p id="message3">MC - 3</p>
+            <p id="message4">MC - 4</p>
+          </div>  */
+
+        it('Extract text of all elements', () => {
+            cy.get('#message-container p').should(($p) => {
+                let jqueryObject = $p.map((index, $eles) => Cypress.$($eles).text());
+
+                console.log('ARRAY -> ', jqueryObject.get()); // ['MC - 1', 'MC - 2', 'MC - 3', 'MC - 4']
+
+            });
+        });
+
+        it('Extract Ids of all elements', () => {
+            cy.get('#message-container p').then(($p) => {
+                let jqueryObject = $p.map((index, $ele) => Cypress.$($ele).attr('id'));
+
+                console.log('ARRAY -> ', jqueryObject.get()); // ['message1', 'message2', 'message3', 'message4']
+            });
+        });
+    });
+
+    
+
 });
         
 
