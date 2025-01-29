@@ -56,7 +56,9 @@ describe('cy.each() Workflow', () => {
     });
 });
 
-/* DOM Used
+/*  ----------------------------      ADVANCED cy.each()  ---------------------------
+
+DOM Used
 <div class="iteration">
     <div class="button-wrapper">
         <button onclick="afterClick(this)">ClickMe</button><p></p>
@@ -119,7 +121,85 @@ describe.only('Gleb Bahmutav playlist - Advanced cy.each() workflow', () => {
               expect(Number(digit)).to.be.within(0, 10);
             });
           });
-
     });
+  });
+  it.only('How to break each($ele)', () => {
+
+    /* You can iterate any array also and also break the loop for index only, not for element
+    Cypress does not stop execution based on element values because return false; only affects 
+    .each() when used based on index, NOT the element itself. */
+    cy.wrap(['a', 'b', 'c', 'd', 'e', 'f']).each(($ele, index) => {
+        cy.log('ELE -> ', $ele);
+        if(index === 2) {
+            return false;
+        }
+    });
+
+    /* When we try to break loop inside any command, then we cannot break each().
+
+       All the commands in cy.each() is queued up beforehand for each element for each()
+
+       below console prints all buttons-[0,1,2...9] befoehand itself,
+    */
+    // cy.visit('http://127.0.0.1:5500/Buttons16.html').then(() => {
+    //       cy.get('button', {timeout: 60000}).should('be.visible');
+    //       cy.get('.button-wrapper button', {timeout: 60000}).each(($btn, index) => {
+    //         console.log('Button -> ', index)
+    //         cy.wrap($btn)
+    //         .click()
+    //         .parent()
+    //         .find('p')
+    //         .should(($p) => {   
+    //           const text = $p.text().trim(); 
+    //           expect(text).to.not.be.empty; 
+    //         })
+    //         .invoke('text').then((digit) => {
+    //           cy.log('DIGIT -> ', digit);
+    //           if(digit === '7') return false;
+    //         });
+    //       });
+    // });
+
+    /* How to stop this queueing then? use a variable before each()
+
+    and use cy.then()
+
+    Unlike direct Cypress commands inside .each(), cy.then() ensures commands inside it execute sequentially 
+    rather than scheduling all at once.
+
+    This means the if(shouldStop === true) return; check actually stops further iterations dynamically.
+
+    Cypress runs .then() sequentially
+
+    Cypress waits for the previous .then() block to finish before executing the next one inside .each(). 
+    This enables stopping dynamically.
+    
+    */
+    cy.visit('http://127.0.0.1:5500/Buttons16.html').then(() => {
+        cy.get('button', {timeout: 60000}).should('be.visible');
+
+        let shouldStop: boolean = false;
+        cy.get('.button-wrapper button', {timeout: 60000}).each(($btn, index) => {
+         cy.then(() => {
+
+            if(shouldStop === true) return
+
+            console.log('Button -> ', index)
+            cy.wrap($btn)
+            .click()
+            .parent()
+            .find('p')
+            .should(($p) => {  
+              const text = $p.text().trim(); 
+              expect(text).to.not.be.empty; 
+            })
+            .invoke('text').then((digit) => {
+              cy.log('DIGIT -> ', digit);
+              if(digit === '7') shouldStop = true;
+            });
+         })
+        });
+  });
+
   });
 });
