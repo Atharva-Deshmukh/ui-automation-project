@@ -48,7 +48,6 @@ describe('HANDLING IFRAMES', () => {
 
         /* cypress-iframe: yarn add -D cypress-iframe
 
-
         You can now use the three included commands.
 
         frameLoaded: This command checks that an iframe has loaded onto the page
@@ -91,9 +90,7 @@ describe('HANDLING IFRAMES', () => {
         cy.enter('#my-iframe').then(getBody => {
         getBody().find('.some-button').should('be.visible').click()
         getBody().contains('Some hidden element').should('not.be.visible')
-        })
-
-        */
+        })*/
 
         it("Way-2: Plugin solution", () => {
             cy.reload();
