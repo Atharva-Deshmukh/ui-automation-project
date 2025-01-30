@@ -18,6 +18,10 @@ import { uiTimeout } from "../../fixtures/commonData";
    Although, locator of iframe is visible direclty by cy.get(), 
    we cannot get the elements inside iframe directly using cy.get()
 
+                                               USE CASE:
+     Shadow DOM: Used in Web Components to create reusable UI elements.
+     IFRAMES: Used to embed third-party content like ads, videos, or external pages.
+
   */
 
 describe('HANDLING IFRAMES', () => {
