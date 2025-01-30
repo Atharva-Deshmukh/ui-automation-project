@@ -18,7 +18,6 @@ export default defineConfig({
     viewportWidth: 1920,
     viewportHeight: 1080,
     watchForFileChanges: false,
-    includeShadowDom: true,
     slowTestThreshold: 180_000,
     setupNodeEvents(on, config) {
       // implement node event listeners here
