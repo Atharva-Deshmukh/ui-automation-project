@@ -49,6 +49,17 @@ This project utilizes Cypress, which has been fully configured in **TypeScript**
     - It's better to use Cypress commands directly instead of relying on script shortcuts. This helps in memorizing commands through frequent use.
 
 ---
+## Hiding XHR request log
+
+Add this code to e2e.ts
+const app = window.top;
+if (!app.document.head.querySelector("[data-hide-command-log-request]")) {
+ const style = app.document.createElement("style");
+ style.innerHTML =".command-name-request, .command-name-xhr { display: none }";
+ style.setAttribute("data-hide-command-log-request", "");
+ app.document.head.appendChild(style); 
+}
+---
 
 ## Adding `WaitUntil`
 
