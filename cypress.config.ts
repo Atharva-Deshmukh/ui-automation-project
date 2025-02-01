@@ -74,7 +74,7 @@ export default defineConfig({
     },
   },
   env: {
-    hideXHRInCommandLog: true,
+    hideXHRInCommandLog: false,
     baseUrl: 'https://demo.automationtesting.in/',
   }
 });
