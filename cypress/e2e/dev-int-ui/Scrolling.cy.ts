@@ -1,3 +1,6 @@
+import { should } from "chai";
+import { uiTimeout } from "../../fixtures/commonData";
+
 describe('scrollIntoView()', () => {
 
     it('Scroll element at the bottom', () => {
@@ -54,6 +57,11 @@ describe('scrollIntoView()', () => {
 
             // will move on to next command even if table is not scrollable
             cy.get('table').scrollTo('bottom', { ensureScrollable: false })*/
+    });
+
+    it.only('CHALLENGE: scroll vertically and horizontally and click the hidden button', () => {
+        cy.visit('https://practice.expandtesting.com/scrollbars', {timeout: uiTimeout});
+        cy.get('#hidingButton', {timeout: 60000}).scrollIntoView().should('be.visible');
     });
 
     
