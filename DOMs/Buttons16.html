@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cy.each()</title>
+</head>
+<body>
+
+    <style>
+        .iteration {
+            margin-top: 10%;
+            margin-left: 50%;
+            margin-right: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .button-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        button {
+            margin-right: 10px;
+        }
+        p {
+            margin: 0;
+        }
+    </style>
+
+<div class="iteration">
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+    <div class="button-wrapper">
+        <button onclick="afterClick(this)">ClickMe</button><p></p>
+    </div>
+</div>
+
+    <script>
+        function afterClick(button) {
+            const paragraph = button.nextElementSibling;
+            paragraph.textContent = '';
+            setTimeout(() => {
+                const randomNumber = Math.floor(Math.random() * 11);
+                paragraph.textContent = randomNumber;
+            }, 3000);
+        }   
+    </script>
+    
+</body>
+</html>

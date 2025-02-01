@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Wrap Example</title>
+</head>
+<body>
+  <div id="message-container">
+    <p id="message1">Message Container - 1</p>
+    <p id="message2">Message Container - 2</p>
+    <h4>H4 text 1</h4>
+    <h4>H4 text 2</h4>
+    <div>
+      <h2>H2 text INSIDE DIV</h2>
+    </div>
+  </div>
+
+  <div id="div-1">
+    <p id="mess1">inside div: 1</p>
+    <div id="div-2" class="AD">
+      <p id="mess2">inside div: 2</p>
+      <div id="div-3">
+        <p id="mess3">inside div: 3</p>
+        <button id="button-3">ClickMe</button>
+     </div>
+     <script>
+      // Add an onclick event to the button
+      document.getElementById('button-3').onclick = function () {
+        // Get the parent div
+        const div = document.getElementById('div-3');
+    
+        // Add a custom property or update the content
+        div.setAttribute('data-clicked', 'true'); // Adds a property
+        const message = document.getElementById('mess3');
+        message.textContent = 'The button was clicked!'; // Updates the content
+      };
+    </script>
+    </div>
+  </div>
+
+  <div id="message....container">
+    Contains ...
+  </div>
+
+  <div id="message::container">
+    Contains ::
+  </div>
+</body>
+</html>
