@@ -1,9 +1,31 @@
 
 import { uiTimeout } from "../../fixtures/commonData";
 
-/*
-For .check()
+/* For .check()
 This element must be an <input> with type checkbox or radio.
+
+There are three states of checkboxes:
+- checked:            [✔]
+- unchecked:          [ ]
+- indeterminate:      [-]  
+
+typically used in "Select All" scenarios where some but not all child checkboxes are selected.
+The indeterminate state is visual only. The checkbox is still either checked or unchecked as a state. 
+That means the visual indeterminate state masks the real value of the checkbox, 
+so that better make sense in your UI!
+Like the checkboxes themselves, indeterminate state looks different in different browsers.
+
+You can’t make a checkbox indeterminate through HTML. 
+There is no indeterminate attribute. It is a property of checkboxes though, which you can change via JS.
+
+var checkbox = document.getElementById("some-checkbox");
+checkbox.indeterminate = true;
+
+            u can verify it:
+            and('have.prop', 'indeterminate', true)
+
+            u can set it:
+            invoke('prop', 'indeterminate', true)
 */
 
 describe('Radio Buttons and Checkboxes in cypress', () => {
