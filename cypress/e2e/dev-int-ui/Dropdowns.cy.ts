@@ -66,6 +66,32 @@ describe('Handling dropdowns in Cypress', () => {
         
         
         */
+
+       // Scenario - 1
+        // cy.visit('https://www.wikipedia.org/', {timeout: uiTimeout}).then(() => {
+        //     cy.contains('Wikipedia').should('be.visible');
+        //     let options = [];
+
+        //     // simply inspect on the suggested options
+        //     cy.get('input#searchInput', {timeout: uiTimeout})
+        //     .type('united')
+        //     .then(() => {
+        //         cy.get('div.suggestions-dropdown a.suggestion-link', {timeout: uiTimeout})
+        //         .should('be.visible')
+        //         .each(($ele) => {
+        //                 cy.wrap($ele).find('.suggestion-title')
+        //                 .should('be.visible')
+        //                 .invoke('text').then((text) => {
+        //                     options.push(text.trim())
+        //                 })
+        //         }).then(() => {
+        //             console.warn('OPTIONS -> ', options);
+        //             expect(options).to.have.length.greaterThan(1);
+        //         });
+        //     });
+        // });
+
+        // Scenario - 1
         cy.visit('https://www.wikipedia.org/', {timeout: uiTimeout}).then(() => {
             cy.contains('Wikipedia').should('be.visible');
             let options = [];
@@ -76,15 +102,16 @@ describe('Handling dropdowns in Cypress', () => {
             .then(() => {
                 cy.get('div.suggestions-dropdown a.suggestion-link', {timeout: uiTimeout})
                 .should('be.visible')
-                .each(($ele) => {
-                        cy.wrap($ele).find('.suggestion-title')
-                        .should('be.visible')
-                        .invoke('text').then((text) => {
-                            options.push(text.trim())
-                        })
+                .find('.suggestion-title')
+                .should('be.visible')
+                .contains('United Arab Emirates')
+                .click()
+                .then(() => {
+                    cy.url().should('match', /Emirates/ig);
                 }).then(() => {
-                    console.warn('OPTIONS -> ', options);
-                    expect(options).to.have.length.greaterThan(1);
+                    cy.go('back').then(() => {
+                        cy.url().should('match', /wikipedia/ig);
+                    })
                 });
             });
         });
