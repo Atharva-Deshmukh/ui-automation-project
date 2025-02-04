@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAVIGATION DOM</title>
+</head>
+<body>
+
+    <style>
+         div {
+            margin-left: 50%;
+            margin-right: 50%; 
+            margin-top: 10%; 
+            border: 1px solid black;
+            width: 20%;
+            height: 20%;
+        }
+    </style>
+
+    <div>
+        <ul>
+            <li>About</li>
+            <li>
+              Services
+              <ul class="secondary-nav">
+                <li class="services-1">Web Design</li>
+                <li class="services-2">Logo Design</li>
+                <li class="services-3">
+                  Print Design
+                  <ul class="tertiary-nav">
+                    <li>Signage</li>
+                    <li>T-Shirt</li>
+                    <li>Business Cards</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Contact</li>
+        <br>
+        <hr>
+        <ul>
+          <li>apples</li>
+          <li>oranges</li>
+          <li>bananas</li>
+          <li class="selected">pineapples</li>
+          <li class="selected">Chillies</li>
+          <li class="selected">grapes</li>
+          <li>grapeVines</li>
+        </ul>
+
+        <br>
+        <hr>
+        <br>
+        <ul>
+            <li id="fruits" class="header">Fruits</li>
+            <li>apples</li>
+            <li>oranges</li>
+            <li>bananas</li>
+            <li id="veggies" class="header">Vegetables</li>
+            <li>cucumbers</li>
+            <li>carrots</li>
+            <li>corn</li>
+            <li id="nuts" class="header">Nuts</li>
+            <li>walnuts</li>
+            <li>cashews</li>
+            <li>almonds</li>
+          </ul>
+    </div>
+    
+</body>
+</html>
