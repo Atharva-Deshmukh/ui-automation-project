@@ -2,6 +2,7 @@
 <br>
 <h1>DISABLE THIS BUTTON</h1> 
 <button id="btn">DisableMe</button>
+<button id="toggleBtn">Enable/Disable</button>
 <br>
 <br>
 <div class="ad_class" id="ad_id">SAMPLE</div>
@@ -15,6 +16,13 @@
     <option value="red">Red</option>
     <option value="blue" selected>Blue</option>
     <option value="green">Green</option>
-  </select>
+</select>
+
+<script>
+  document.getElementById("toggleBtn").addEventListener("click", function() {
+      let btn = document.getElementById("btn");
+      btn.disabled = !btn.disabled;
+  });
+</script>
   
 
