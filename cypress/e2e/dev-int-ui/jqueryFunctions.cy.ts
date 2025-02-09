@@ -311,6 +311,18 @@ describe('Workflow for cypress jquery functions', () => {
         });
     });
 
+    describe.only('$ele.hasClass()', () => {
+        before(() => {
+            cy.visit('http://127.0.0.1:5500/DOMs/INPUTS_DOM.html', { timeout: 60000 });
+        });
+
+        it('get class of the element', () => {
+            cy.get('div:contains("SAMPLE")', { timeout: 60000 }).should('be.visible').then(($ele) => {
+                expect($ele.hasClass('ad_class')).to.be.true;
+            });
+        });
+    });
+
     /* The $ele.prop() 
     allows you to get or set properties of DOM elements. When used with Cypress, it provides 
     direct access to the underlying DOM element(s) returned by a selector, enabling you to 
@@ -372,7 +384,7 @@ describe('Workflow for cypress jquery functions', () => {
         Without .get(), .map() results in a jQuery collection.
     
     */
-    describe.only('$ele.map()', () => {
+    describe.skip('$ele.map()', () => {
         before(() => {
             cy.visit('http://127.0.0.1:5500/DOM-2.html', { timeout: 60000 });
         });
@@ -403,9 +415,5 @@ describe('Workflow for cypress jquery functions', () => {
             });
         });
     });
-
-    
-
 });
-        
 
