@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cypress.dom()</title>
+    <style>
+        /* Hidden Elements */
+        .hidden {
+            display: none;
+        }
+        .invisible {
+            visibility: hidden;
+        }
+
+        /* Scrollable Element */
+        .scrollable {
+            width: 300px;
+            height: 150px;
+            overflow: auto;
+            border: 1px solid black;
+        }
+        .content {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Attached Elements -->
+    <div id="attached-element">I am an attached element.</div>
+
+    <!-- Hidden Elements -->
+    <div class="hidden">I am hidden using display: none.</div>
+    <div class="invisible">I am hidden using visibility: hidden.</div>
+
+    <button class="btn">Focusable</button>
+
+    <div id="uncle">Uncle</div>
+    <div id="grandparent">
+        GrandParent
+        <div id="parent">
+            Parent
+            <div id="child">
+                Child
+            </div>
+        </div>
+    </div>
+
+    <!-- Scrollable Element -->
+    <div class="scrollable">
+        <div class="content">
+            Scroll inside this div to see more content.
+        </div>
+    </div>
+
+    <script>
+        // Detached Element (Created but not added to the DOM)
+        let detachedElement = document.createElement("div");
+        detachedElement.innerText = "I am a detached element.";
+    </script>
+
+</body>
+</html>
