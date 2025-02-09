@@ -1,0 +1,1 @@
+// cy.get('#newEleId', {timeout: uiTimeout}).invoke('remove'); 
