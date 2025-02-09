@@ -166,15 +166,42 @@ Ways to test:
 
 Ways to test:
 
--> Use the U
+->  cy.get('body', {timeout: uiTimeout})
+        .should('be.visible')
+        .then(($body) => {
+            if($body.find('input#displayed-text:visible').length) {
+                cy.log('VISIBLE');
+            }
+            else {
+            //
+            }
+
+
+THERE IS also a PLUGIN: cypress-if, but Not preferred in the interviews
+
+4. Dynamic text
+   The pattern of doing something conditionally based on whether or not certain text 
+   is present is identical to element existence above.
+
+    Conditionally check whether an element has certain text:
+    // this only works if there's 100% guarantee body has fully rendered without any pending changes
+    // to its state
+    cy.get('body').then(($body) => {
+        // synchronously ask for the body's text
+        // and do something based on whether it includes
+        // another string
+        if ($body.text().includes('some string')) {
+        // yup found it
+        cy.get(...).should(...)
+        } else {
+        // nope not here
+        cy.get(...).should(...)
+        }
+    })
 
 */
 
 import { uiTimeout } from "../../fixtures/commonData";
-
-/*
-<input id="displayed-text" name="show-hide" class="inputs displayed-class" placeholder="Hide/Show Example" type="text" style="display: block;">
-*/
 
 describe('Conditional Testing', () => {
 
