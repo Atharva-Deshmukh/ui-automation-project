@@ -311,7 +311,7 @@ describe('Workflow for cypress jquery functions', () => {
         });
     });
 
-    describe.only('$ele.hasClass()', () => {
+    describe('$ele.hasClass()', () => {
         before(() => {
             cy.visit('http://127.0.0.1:5500/DOMs/INPUTS_DOM.html', { timeout: 60000 });
         });
@@ -319,6 +319,52 @@ describe('Workflow for cypress jquery functions', () => {
         it('get class of the element', () => {
             cy.get('div:contains("SAMPLE")', { timeout: 60000 }).should('be.visible').then(($ele) => {
                 expect($ele.hasClass('ad_class')).to.be.true;
+            });
+        });
+    });
+
+    describe.only('$ele.is(":enabled") Demonstration', () => {
+        before(() => {
+            cy.visit('http://127.0.0.1:5500/DOMs/INPUTS_DOM.html', { timeout: 60000 });
+        });
+
+        let toggleButton = () => cy.get('#toggleBtn', { timeout: 60000 });
+        let targetButton = () => cy.get('#btn', { timeout: 60000 });
+
+        it('Disable a button and conditonally click it using jquery', () => {
+
+            /* DOM used
+            
+            <h1>DISABLE THIS BUTTON</h1> 
+            <button id="btn">DisableMe</button>
+            <button id="toggleBtn">Enable/Disable</button>
+            <br>
+
+            <script>
+                document.getElementById("toggleBtn").addEventListener("click", function() {
+                    let btn = document.getElementById("btn");
+                    btn.disabled = !btn.disabled;
+                });
+            </script>
+            */
+
+            toggleButton().should('be.visible');
+            targetButton().should('be.visible')
+            .and('be.enabled');
+
+            toggleButton().click();  // else me jaayega abhi
+
+            targetButton().then(($ele) => {
+                if($ele.is(':enabled')) {
+                    cy.log('ALREADY ENABLED');
+                    targetButton().click();
+                }
+                else {
+                    cy.log('NOT ENABLED, NEED TO MANUALLY ENABLE');
+                    toggleButton().click();
+                    targetButton().should('be.visible').and('be.enabled');
+                    targetButton().click();
+                }
             });
         });
     });
