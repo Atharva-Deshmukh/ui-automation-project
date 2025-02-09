@@ -44,12 +44,7 @@ cy.get('.my-class').then(($ele) => {
   cy.wrap($ele).find('.child').click(); // Makes '.find()' asynchronous
 });
 
-$ele.text() includes all descendant text nodes but does not return HTML tags or attributes.
-
-*/
-
-import * as exp from "constants";
-
+$ele.text() includes all descendant text nodes but does not return HTML tags or attributes. */
 describe('Workflow for cypress jquery functions', () => {
 
     /* For elements like <div>, <span>, or <p>, which contain text but not a value attribute, 
