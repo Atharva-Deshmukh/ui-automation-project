@@ -19,6 +19,11 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+// DISABLING FOR NOW
+// Cypress.Keyboard.defaults({
+//     keystrokeDelay: 1000,
+// });
+
 const app = window.top;
 if (!app.document.head.querySelector("[data-hide-command-log-request]")) {
  const style = app.document.createElement("style");
