@@ -7,7 +7,11 @@ export default defineConfig({
   e2e: {
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     chromeWebSecurity: false,
-    numTestsKeptInMemory: 0,
+
+    /* numTestsKeptInMemory: 50, --> making it 0 disables timetravel
+       this also helps to log element yeild on console after clicking element */
+    numTestsKeptInMemory: 50,
+
     experimentalMemoryManagement: true,
     requestTimeout: 90000,
     responseTimeout: 90000,
