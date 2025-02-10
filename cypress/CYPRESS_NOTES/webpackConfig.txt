@@ -1,5 +1,7 @@
 webpack.config.ts manages aliases of imports
 
+Its a preprocessor
+
 ex: when we add relative imprt: ../../../file
 
 we can now add: import @folder/file
