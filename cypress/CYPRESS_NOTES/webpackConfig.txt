@@ -1,0 +1,7 @@
+webpack.config.ts manages aliases of imports
+
+ex: when we add relative imprt: ../../../file
+
+we can now add: import @folder/file
+
+we add alias for the relative path using webpack npm package
