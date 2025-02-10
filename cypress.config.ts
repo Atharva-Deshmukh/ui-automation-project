@@ -8,7 +8,7 @@ export default defineConfig({
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     chromeWebSecurity: false,
 
-    /* numTestsKeptInMemory: 50, --> making it 0 disables timetravel
+    /* numTestsKeptInMemory: 50 (default), --> making it 0 disables timetravel
        this also helps to log element yeild on console after clicking element */
     numTestsKeptInMemory: 50,
 
@@ -17,7 +17,7 @@ export default defineConfig({
     responseTimeout: 90000,
     defaultCommandTimeout: 40000,
     pageLoadTimeout: 120000,
-    testIsolation: false,
+    testIsolation: false,    // no logout after each it block and data is preserved across test suite
     video: false,
     viewportWidth: 1920,
     viewportHeight: 1080,
@@ -82,24 +82,3 @@ export default defineConfig({
     baseUrl: 'https://demo.automationtesting.in/',
   }
 });
-
-
-/*
-createFiles({ numberOfFiles, sizeInMB, directory }) {
-        const dirPath = path.resolve(directory);
-  
-        // Ensure the directory exists
-        if (!fs.existsSync(dirPath)) {
-          fs.mkdirSync(dirPath, { recursive: true });
-        }
-  
-        for (let i = 0; i < numberOfFiles; i++) {
-          const filePath = path.join(dirPath, `file_${i}.txt`);
-          const data = '0'.repeat(sizeInMB * 1024 * 1024); // Generate 10 MB of '0' characters
-  
-          fs.writeFileSync(filePath, data);
-        }
-  
-        return null; // indicate the task is complete
-      }
-*/
