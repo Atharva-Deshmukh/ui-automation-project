@@ -58,13 +58,13 @@ cy.visit('http://localhost:3000/#dashboard', {
 USE:
 Bootstrapping your App
 
-n computing, the term bootstrap means to boot or to load a program into a computer 
+In computing, the term bootstrap means to boot or to load a program into a computer 
 using a much smaller initial program to load in the desired program, which is usually an OS.
-
 Set a token to localStorage for login during Single Sign On (SSO)
+
 ---------------------------------------------------------------------------------------------------
 onLoad is called once your page has fired its load event. 
-All of the scripts, stylesheets, html and other resources are GUARATEED to be available at this point.
+All of the scripts, stylesheets, html and other resources are GUARANTEED to be available at this point.
 
 cy.visit('http://localhost:3000/#/users', {
   onLoad: (contentWindow) => {
@@ -94,9 +94,7 @@ cy.visit('https://example.cypress.io/users?page=1', {
 })
 ---------------------------------------------------------------------------------------------------
 
-Visit local file when baseUrl is set --> SET { baseUrl: null } in 'it' block
-If you have baseUrl set, but need to visit a local file in a single test or a group of tests, 
-disable the baseUrl using per-test configuration. Imagine this Cypress configuration:
+Visit local file when baseUrl is set --> JUST SET { baseUrl: null } in 'it' block
 
 export default defineConfig({
   e2e: {
@@ -118,8 +116,7 @@ it('visits local file', { baseUrl: null }, () => {
 
 ---------------------------------------------------------------------------------------------------
 Visit will automatically follow redirects
-// we aren't logged in, so our web server
-// redirected us to /login
+// we aren't logged in, so our web server redirected us to /login
 cy.visit('http://localhost:3000/admin')
 cy.url().should('match', /login/)
 
