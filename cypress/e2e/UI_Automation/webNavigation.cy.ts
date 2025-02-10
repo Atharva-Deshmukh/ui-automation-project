@@ -1,5 +1,3 @@
-import { uiTimeout } from "../../fixtures/commonData";
-
 /*  Different ways
 
     - cy.visit('/') // visits the baseUrl set in config file
