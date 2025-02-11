@@ -26,3 +26,6 @@ Cypress.Commands.addQuery('getById', function (id: string) {
     console.warn('PUTIN'); // Log "PUTIN" every time cy.get() is called
     return originalFn.apply(this, args); // Call the original cy.get() function
   });
+
+  /* The query API relies on this to set timeouts, which means that callbackFn should 
+  always use function () {} and not be an arrow function (() => {}). */
