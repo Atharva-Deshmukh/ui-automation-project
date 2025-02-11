@@ -3,7 +3,7 @@
 Cypress.Commands.addQuery('getById', function (id: string) {
     Cypress.log({ name: 'getById', message: id });
   
-    // this inner function is executed multiple times
+    // this inner function is executed multiple times 
     return function() {
       console.log('getById called with:', id);
   
