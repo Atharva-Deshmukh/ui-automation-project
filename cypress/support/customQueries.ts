@@ -12,7 +12,7 @@ Cypress.Commands.addQuery('getById', function (id: string) {
 
        When the element is not found, we return an empty jQuery object (Cypress.$()), 
        which triggers Cypress' built-in retry logic. */
-       
+
       const $element = Cypress.$(`#${id}`);
       console.warn('ELEMENT BY ID -> ', $element.length ? $element[0] : null);
   
@@ -21,3 +21,8 @@ Cypress.Commands.addQuery('getById', function (id: string) {
     };
   });
   
+
+  Cypress.Commands.overwriteQuery('get', function (originalFn, ...args) {
+    console.warn('PUTIN'); // Log "PUTIN" every time cy.get() is called
+    return originalFn.apply(this, args); // Call the original cy.get() function
+  });

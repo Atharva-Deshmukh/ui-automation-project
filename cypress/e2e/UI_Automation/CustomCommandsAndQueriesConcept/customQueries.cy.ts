@@ -10,16 +10,9 @@ STEPS:
 - Write the query directly in command.js and make it part of namespace
  OR write it in a separate file and import it in command.ts and then make it part of namespace
 
-Cypress.Commands.addQuery('getById', function (id) {
-  // Outer function (executes once per command)
-  Cypress.log({ name: 'getById', message: id });
+QUERIES are
+cypress\support\customQueries.ts
 
-  return function (subject) {
-    // Inner function (executes multiple times with retry)
-    console.log('getById called with:', id);
-    return cy.get(`#${id}`);
-  };
-});
 
 declare global {
   namespace Cypress {
@@ -35,6 +28,12 @@ declare global {
   }
 }
 
+Cypress.Commands.overwriteQuery('get', function (originalFn, ...args) {
+  console.log('PUTIN'); // Log "PUTIN" every time cy.get() is called
+  return originalFn.apply(this, args); // Call the original cy.get() function
+});
+
+
 
 */
 
@@ -42,9 +41,16 @@ import { uiTimeout } from "../../../fixtures/commonData";
 
 describe('Custom Queries workflow', () => {
 
+  before(() => {
+    cy.visit('https://rahulshettyacademy.com/AutomationPractice/', {timeout: uiTimeout});
+  });
+
     it('Creating a new custom query', () => {
-      cy.visit('https://rahulshettyacademy.com/AutomationPractice/', {timeout: uiTimeout});
         cy.getById('dropdown-class-example').should('be.visible');
+    });
+
+    it('Creating a new custom query', () => {
+        cy.get('#dropdown-class-example').should('be.visible');
     });
 
 });
