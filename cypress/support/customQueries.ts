@@ -1,7 +1,10 @@
+
+// the outer function getById is executed only once
 Cypress.Commands.addQuery('getById', function (id: string) {
     Cypress.log({ name: 'getById', message: id });
   
-    return () => {
+    // this inner function is executed multiple times
+    return function() {
       console.log('getById called with:', id);
   
       /* Use Cypress.$() to get the element, ensuring it works within Cypress' retry mechanism
