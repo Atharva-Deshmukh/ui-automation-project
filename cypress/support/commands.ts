@@ -39,6 +39,7 @@ import { login, logout } from "./login_helper";
 import 'cypress-wait-until';
 import '@4tw/cypress-drag-drop';
 import 'cypress-iframe';
+import '../support/customQueries';
 
 declare global {
   namespace Cypress {
@@ -47,6 +48,9 @@ declare global {
         logoutTargetSite(): void;
         countMenus(): void;
         logWithPrefix(options: any): string;
+
+        // Adding my query here
+        getById(id: string): Chainable<JQuery<HTMLElement>>;
     }
   }
 }
@@ -68,6 +72,14 @@ declare global {
 }
  */
 
+// CUSTOM QUERIES
+
+
+
+
+
+
+// CUSTOM COMMANDS
 // parent commands: can directly used with cy...
 Cypress.Commands.add('loginTargetSite', (targetSite: string, username: string, password: string) => {
     login(targetSite, username, password);

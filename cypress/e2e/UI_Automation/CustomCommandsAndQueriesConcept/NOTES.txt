@@ -1,0 +1,98 @@
+Concept of queries, commands and assertions
+
+ All methods you chain off of cy in your Cypress tests are commands.
+ Commands includes viz. queries, actions, assertions and non-queries
+
+                                    Queries:
+                            --------------------------
+- Cypress commands that read the state of your application. 
+- They return a subject for further commands to act or assert on, and they retry untill the assertion passes
+
+// Navigation commands
+.parent()
+.parents()
+.parentsUntil()
+.prev()
+.prevAll()
+.prevUntil()
+.root()
+.children()
+.closest()
+.next()
+.nextAll()
+.nextUntil()
+.first()
+.last()
+.shadow()
+.siblings()
+
+// focused
+.focused()
+
+// get related
+.get()
+.contains()
+.filter()
+.find()
+.as()
+.eq()
+.invoke()
+.not()
+
+// doc, url, window, hash, its
+.document()
+.window()
+.title()
+.url()
+.location()
+.hash()
+.its()
+
+                                    Assertions:
+                            --------------------------
+- Assertions are Cypress commands that assert on the state of your application. 
+- They pause your test until the given condition is met, or until they time out. 
+
+.and()
+.should()
+
+                                    Non-queries:
+                            --------------------------
+                            
+- Non-queries only execute once.
+.visit()
+.wait()
+.go()
+.hover()
+.spy()
+.stub()
+.within()
+.then()
+.blur()
+.focus()
+.task()
+.wrap()
+.readFile()
+.writeFile()
+
+                                    Queries vs non-queries:
+                                    ----------------------
+- Queries are synchronous. They do not return or await promises.
+- Queries are retriable. Once you return the inner function, Cypress takes control, 
+  handling retries on your behalf.
+- Queries are idempotent. Once you return the inner function, 
+  Cypress will invoke it repeatedly. Invoking the inner function multiple times 
+   must not change the state of your application.
+
+                                    When to use Custom Queries
+                                    --------------------------
+
+- If you want your method to have builtin retry-ability, and especially if you return 
+  a DOM element for further commands to act on, consider writing a custom query instead.
+
+                                    When to use Custom Commands
+                                    --------------------------
+- If you want to chain together existing Cypress commands as a shortcut, since commands can be chained.
+- You'll also want to write a command instead of a query if your method needs to be asynchronous, 
+  or if it can be called only once since commands return promises that make them asynchronous
+                                    

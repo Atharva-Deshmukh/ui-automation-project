@@ -1,4 +1,11 @@
-describe('Custom command workflow for child command and dual command WITH NON-ISOLATED TEST CASES (it blocks)', () => {
+/* There are two API available for adding custom commands:
+
+- Cypress.Commands.add() - use to add a custom command to use when writing tests
+- Cypress.Command.overwrite() - use to override an existing built-in Cypress command 
+  or reserved internal function. Caution: this overrides it for Cypress as well and 
+  could impact how Cypress behaves. */
+
+describe('Custom command workflow', () => {
     before(() => {
         // ensure clean test slate for these tests
         // clears sessionsstorage, localstorage and cookies
