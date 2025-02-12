@@ -1,12 +1,2 @@
-PRACTICE: https://practice.expandtesting.com/#assertions
-
-
-.then()
-.within()
-
-jquery methods
-contains()
-filter()
-not()
-
-Cypress API >> browsers
+MISCELLENEOUS:
+How to run specs in specific order: https://www.youtube.com/watch?v=pA2C0q1mgnA
