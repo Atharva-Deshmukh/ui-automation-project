@@ -1,4 +1,3 @@
-import * as doc from "pdfkit";
 import { uiTimeout } from "../fixtures/commonData";
 
 Cypress.Commands.add('getByName', (name) => {
