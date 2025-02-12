@@ -40,78 +40,23 @@ import 'cypress-wait-until';
 import '@4tw/cypress-drag-drop';
 import 'cypress-iframe';
 import '../support/customQueries';
+import '../support/customCommands';
 
 declare global {
   namespace Cypress {
     interface Chainable {
-        loginTargetSite(targetSite: string, username: string, password: string): void;
-        logoutTargetSite(): void;
-        countMenus(): void;
-        logWithPrefix(options: any): string;
-
         // Adding my query here
         getById(id: string): Chainable<JQuery<HTMLElement>>;
+
+        // adding my new custom commands
+        getByName(name: string): Chainable<JQuery<HTMLElement>>;
+        Console(): void;
+        hybridConsole(): void;
+
     }
   }
 }
 
-/**
- export function loginWithUserGoToSite(username, sitename) {
-  cy.log("login with " + username + " and Open site " + sitename)
-  cy.session([username, Cypress.env('ECODOMUS_ADMIN_PASSWORD')], () => {
-    //login with username
-    loginToEcodomus(username)
-    //validate Site is present
-    goToSites()
-    if (sitename != "") {
-      siteSearch().clear().type(sitename + '{enter}')
-      loadingImgWait().should("not.exist")
-      searchResultTable().contains(sitename).click()
-    }
-  })
-}
- */
-
-// CUSTOM QUERIES
-
-
-
-
-
-
-// CUSTOM COMMANDS
-// parent commands: can directly used with cy...
-Cypress.Commands.add('loginTargetSite', (targetSite: string, username: string, password: string) => {
-    login(targetSite, username, password);
-});
-
-Cypress.Commands.add('logoutTargetSite', () => {
-    logout();
-});
-
-// child commands: can be used with a parent command 
-Cypress.Commands.add('countMenus', { prevSubject: 'element' }, (subject, options) => {
-  let menuCount: number =  0;
-  cy.wrap(subject).find('ul.oxd-main-menu li a').each(($li) => {
-    const classWithinSubject = $li.attr('class');
-    // cy.log('classWithinSubject -> ', classWithinSubject);
-    const regex = /\b\w*item\w*\b/g;
-    if(regex.test(classWithinSubject)) { menuCount++; }
-    cy.log('menuCount -> ', menuCount);
-  });
-});
-
-// dual commands: can be used with or without a parent
-// Custom command to log a message with a customizable prefix
-// used options here as second parameter
-Cypress.Commands.add('logWithPrefix', { prevSubject: 'optional' }, (subject, options) => {
-  const prefix = options && options.prefix ? options.prefix : 'Default';
-  const suffix = options && options.suffix ? options.suffix : 'Default';
-  
-  const message = subject?`Subject: ${subject}, Prefix: ${prefix} , Suffix: ${suffix}`: `No subject, Prefix: ${prefix}, Suffix: ${suffix}`;
-
-  cy.log(message);
-});
 
 
 
