@@ -59,9 +59,9 @@
     undici-types "~5.26.4"
 
 "@types/pdfkit@^0.11.5":
-  version "0.13.8"
-  resolved "https://registry.yarnpkg.com/@types/pdfkit/-/pdfkit-0.13.8.tgz#56847c021d51c66f20f32a5265effbf2324cdf3f"
-  integrity sha512-lX+wmG9KNisFQXCC/facEw+rljSkMyo6Eh+W4gp/uPZzzmA7TTchKkCp5tMrXDY+lQjqzoxt8rGKRlpxf1c3hw==
+  version "0.13.9"
+  resolved "https://registry.yarnpkg.com/@types/pdfkit/-/pdfkit-0.13.9.tgz#0acf17575737c8856a946e5dfad35ad444b510a1"
+  integrity sha512-RDG8Yb1zT7I01FfpwK7nMSA433XWpblMqSCtA5vJlSyavWZb303HUYPCel6JTiDDFqwGLvtAnYbH8N/e0Cb89g==
   dependencies:
     "@types/node" "*"
 
@@ -371,6 +371,11 @@ cypress-iframe@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cypress-iframe/-/cypress-iframe-1.0.1.tgz#2a286cfd47a240aa9af0ad9f339f4c6f942089f8"
   integrity sha512-Ne+xkZmWMhfq3x6wbfzK/SzsVTCrJru3R3cLXsoSAZyfUtJDamXyaIieHXeea3pQDXF4wE2w4iUuvCYHhoD31g==
+
+cypress-real-events@^1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/cypress-real-events/-/cypress-real-events-1.14.0.tgz#c5495db50a2bd247f4accde983af7153566945d3"
+  integrity sha512-XmI8y3OZLh6cjRroPalzzS++iv+pGCaD9G9kfIbtspgv7GVsDt30dkZvSXfgZb4rAN+3pOkMVB7e0j4oXydW7Q==
 
 cypress-wait-until@^3.0.1:
   version "3.0.1"

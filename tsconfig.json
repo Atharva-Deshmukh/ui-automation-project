@@ -2,7 +2,7 @@
     "compilerOptions": {
       "target": "es6",
       "lib": ["es6", "dom"],
-      "types": ["cypress", "@4tw/cypress-drag-drop"],
+      "types": ["cypress", "@4tw/cypress-drag-drop", "cypress-real-events"],
       "moduleResolution": "node",     // Use Node.js module resolution
       "moduleDetection": "force", // every file is treated as separete
     },
