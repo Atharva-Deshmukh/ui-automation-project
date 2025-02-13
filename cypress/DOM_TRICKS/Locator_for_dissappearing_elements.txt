@@ -1,0 +1,25 @@
+
+CASE: mouseover and mouseout issue
+-----------------------------------------------------------------------
+a color gets changed on mouseover but when we take mouse away from it
+in inspect, the color changes since mouseout event is triggered.
+
+WORKAROUND:
+in console write
+setTimeOut(() => {debugger;}, 3000);
+hit enter
+
+and do hovering or searching (autosuggest)
+
+debugger gets triggered after 3 seconds and everything PAUSES, we can now get
+locator
+
+CASE: Autosearch dissappears and we need debugger as per our control
+although timeout is more reliable way
+For cases without mouseout issue, 
+-----------------------------------------------------------------------
+go to sources >> snippets >> create new snippet
+write -> debugger;
+
+bring desired state in DOM and right click in this script file here and run
+everything pauses and we can now get locator.
