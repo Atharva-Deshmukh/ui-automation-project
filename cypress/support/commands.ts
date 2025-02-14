@@ -52,7 +52,7 @@ declare global {
         getByName(name: string): Chainable<JQuery<HTMLElement>>;
         Console(): void;
         hybridConsole(): void;
-
+        languageWiseStrings(languageEndpoint: string): Chainable<string>;
     }
   }
 }

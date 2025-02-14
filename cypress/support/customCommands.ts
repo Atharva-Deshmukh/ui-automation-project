@@ -22,3 +22,12 @@ Cypress.Commands.overwrite('type', (originalFn, element, text, options = {}) => 
 
     return originalFn(element, text, options);
 });
+
+
+Cypress.Commands.add('languageWiseStrings', (languageEndpoint) => {
+    switch(languageEndpoint) {
+        case 'in': return "India";
+        case 'ae': return "United Arab Emirates";
+        case 'ca': return "Canada (English)";
+    }
+});
