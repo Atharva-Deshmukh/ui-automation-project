@@ -1,4 +1,3 @@
-import { should } from "chai";
 import { uiTimeout } from "../../fixtures/commonData";
 
 describe('scrollIntoView()', () => {
