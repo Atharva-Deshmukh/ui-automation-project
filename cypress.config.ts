@@ -26,6 +26,15 @@ export default defineConfig({
     slowTestThreshold: 180_000,
     setupNodeEvents(on, config) {
       // implement node event listeners here
+
+      // Code to launch browser in icognito mode
+      // on('before:browser:launch', (browser = {}, launchOptions) => {
+      //   if(browser.family === 'chromium' || browser.name !== 'electron') {
+      //     launchOptions.args.push('--incognito');
+      //   }
+      //   return launchOptions;
+      // });
+
       on('task', {
         createFiles({ numberOfFiles, sizeInMB, directory }) {
           const dirPath = path.resolve(directory);
