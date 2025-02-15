@@ -1,0 +1,48 @@
+Control the size and orientation of the screen for your application.
+
+You can set the viewport's width and height globally by defining viewportWidth 
+and viewportHeight in the Cypress configuration.
+
+cy.viewport() yields null.
+
+cy.viewport(550, 750) // Set viewport to 550px x 750px
+cy.viewport('iphone-6') // Set viewport to 375px x 667px
+
+Some preset values which no need to remember:
+A preset dimension to set the viewport. Preset supports the following options:
+
+Preset	 width	height
+ipad-2	  768	1024
+ipad-mini	768	1024
+iphone-3	320	480
+iphone-4	320	480
+iphone-5	320	568
+iphone-6	375	667
+iphone-6+	414	736
+
+
+Dynamically test multiple viewports
+
+describe('Logo', () => {
+
+const sizes = ['iphone-6', 'ipad-2', [1024, 768]]
+
+  sizes.forEach((size) => {
+    // make assertions on the logo using
+    // an array of different viewports
+    it(`Should display logo on ${size} screen`, () => {
+      if (Cypress._.isArray(size)) {
+        cy.viewport(size[0], size[1])
+      } else {
+        cy.viewport(size)
+      }
+
+      cy.visit('https://example.cypress.io')
+      cy.get('#logo').should('be.visible')
+    })
+  })
+})
+
+// the viewport will now be changed to 736px x 414px
+// and simulates the user holding the iPhone in landscape
+cy.viewport('iphone-6', 'landscape')
