@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliders</title>
+</head>
+<body>
+
+    <!-- TWO TYPES OF SLIDERS
+    Type                   HTML Element               Use Case
+---------------------------------------------------------------
+Range Slider          <input type="range">       Selecting a numeric value (e.g., volume, brightness)
+Image/Content Slider  <div> with images & JS     Sliding images or text (e.g., carousel, testimonials) -->
+
+    <!-- RANGE SLIDERS -->
+    <label for="volume">Volume:</label>
+    <input type="range" id="volume" min="0" max="100" value="50" step="10" onchange="displayValue(this)"> 
+    <p id="response">Response -> </p>
+    <!-- Step means minimum value u can increment of decrement -->
+    
+
+    <script>
+        function displayValue(inputEle) {
+            let displayP = document.getElementById('response');
+            document.getElementById('response').innerText = 'Response ->';
+            document.getElementById('response').innerText += '   ' + inputEle.value;
+        }
+    </script>
+    
+</body>
+</html>
