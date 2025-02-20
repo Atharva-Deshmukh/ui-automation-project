@@ -4,7 +4,7 @@ export default defineConfig({
   e2e: {
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     chromeWebSecurity: false,
-    baseUrl: 'https://automatenow.io/',
+    scrollBehavior: false,  // to prevent cypress' default behaviour to scroll elements into focus
 
     /* numTestsKeptInMemory: 50 (default), --> making it 0 disables timetravel
        this also helps to log element yeild on console after clicking element */
