@@ -7,3 +7,30 @@ it('check if the array is reversed', () => {
     let reversedArr: number[] = Cypress._.reverse(arr);
     expect(reversedArr).to.deep.eq([3, 2, 1]);
 });
+
+describe('Loadash Loop', () => {
+    Cypress._.times(5, (i) => {
+        it(`Loadash Loop. Iteration - ${i}`, () => {
+            cy.log('-----ITERATION-----');
+        });
+    });
+
+    /*
+    Loadash Loop
+        Loadash Loop. Iteration - 0
+        log-----ITERATION-----
+
+        Loadash Loop. Iteration - 1
+
+        log-----ITERATION-----
+        Loadash Loop. Iteration - 2
+
+        log-----ITERATION-----
+        Loadash Loop. Iteration - 3
+
+        log-----ITERATION-----
+        Loadash Loop. Iteration - 4
+
+        log-----ITERATION-----
+    */
+});
