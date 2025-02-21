@@ -75,4 +75,9 @@ getAllSessionStorage()
     },
     } 
 
+
+    ////////////////////////////////////////// TIP ///////////////////////////////////////
+
+    U can use cy.wrap(localStorage).invoke('setItem', 'item')
+
 */
