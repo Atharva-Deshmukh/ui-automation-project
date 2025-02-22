@@ -35,12 +35,12 @@
 //     }
 //   }
 // }
-import { login, logout } from "./login_helper";
 import 'cypress-wait-until';
 import '@4tw/cypress-drag-drop';
 import 'cypress-iframe';
 import '../support/customQueries';
 import '../support/customCommands';
+import '../support/tableCustomCommands';
 
 declare global {
   namespace Cypress {
@@ -53,6 +53,14 @@ declare global {
         Console(): void;
         hybridConsole(): void;
         languageWiseStrings(languageEndpoint: string): Chainable<string>;
+
+        /* table custom commands
+        Cypress commands (cy.getTableColumnIndex) return a chainable object (Chainable), 
+        not a primitive value like a string
+
+        better use a function
+        */
+        getTableColumnIndex(columnName: string): Chainable<any>;
     }
   }
 }
