@@ -137,7 +137,8 @@ it.only('Pagination', () => {
             }
             // disabled hai to stop
             else {
-                expect($parent.find(buttonSelector)).to.have.class('disabled');
+                cy.log('ELSE')
+                expect($parent.find(buttonSelector).parent()).to.have.class('disabled');
             }   
         })
 
@@ -145,12 +146,4 @@ it.only('Pagination', () => {
 
       // Usage:
       clickUntilEnabled('a:contains("Previous")');
-      
-
-
-
-
-   
-
-
 });
