@@ -4,7 +4,13 @@ Arguments: (value, index, collection)
 
 No matter what is returned in the callback function, .each() will always yield the original array.
 
-You can stop the .each() loop early by returning false in the callback function. */
+You can stop the .each() loop early by returning false in the callback function. 
+
+
+NOTE THAT:
+cypress's each(element, index) is different, it is used in cypress elements only
+for pure jquery elements, we have a separate each(index, element)
+*/
 describe('cy.each() Workflow', () => {   
     it('Get Cypress spec', () => {
         cy.visit('http://127.0.0.1:5500/DOM-2.html').then(() => {
