@@ -1,0 +1,4 @@
+by default, all files are considered within same module by TS,
+hence variables declared by same name in two different files are giving error
+as already declared, so add this in tsconfig >> compilerOptions
+"moduleDetection": "force", // every file is treated as separete

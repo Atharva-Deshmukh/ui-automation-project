@@ -1,0 +1,12 @@
+when cypress is set to typescrip, by default, it does not import JSON using
+import data from '../../fixtures/jsonFile';
+
+so in tsconfig.json >> compiler options, we add 
+"resolveJsonModule": true,
+
+----------------------------------------------------------------
+
+JSON don't have export in them, so to import them
+
+// Allow 'import x from y' when a module doesn't have a default export.
+also add "allowSyntheticDefaultImports": true 

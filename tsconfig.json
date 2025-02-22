@@ -5,6 +5,8 @@
       "types": ["cypress", "@4tw/cypress-drag-drop", "cypress-real-events"],
       "moduleResolution": "node",     // Use Node.js module resolution
       "moduleDetection": "force", // every file is treated as separete
+      "resolveJsonModule": true, // to import JSON files also from import
+      "allowSyntheticDefaultImports": true // Allow 'import x from y' when a module doesn't have a default export.
     },
     "include": ["**/*.ts"]
 }
