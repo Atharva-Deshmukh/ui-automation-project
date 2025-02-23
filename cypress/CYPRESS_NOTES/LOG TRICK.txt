@@ -1,0 +1,8 @@
+cy.get(something).then(cosole.log)
+Cypress will pass the resolved subject (the matched element) to console.log, 
+logging it in the browser’s console.
+
+Example:
+cy.get('button').then(console.log);
+If there is a <button> on the page, this will log the corresponding 
+jQuery-wrapped DOM element in the console.
