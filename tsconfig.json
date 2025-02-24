@@ -2,7 +2,7 @@
     "compilerOptions": {
       "target": "es6",
       "lib": ["es6", "dom"],
-      "types": ["cypress", "@4tw/cypress-drag-drop", "cypress-real-events"],
+      "types": ["cypress", "@4tw/cypress-drag-drop", "cypress-real-events", "node"],
       "moduleResolution": "node",     // Use Node.js module resolution
       "moduleDetection": "force", // every file is treated as separete
       "resolveJsonModule": true, // to import JSON files also from import
