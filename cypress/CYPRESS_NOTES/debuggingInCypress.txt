@@ -1,0 +1,21 @@
+We use cy.debug() and cy.pause()
+
+pause() is used mostly
+Never used debug()
+
+
+describe('WORKFLOWS', () => {
+    it('Use of debugger', () => {
+        cy.visit('https://rahulshettyacademy.com/AutomationPractice/', {timeout: uiTimeout});
+        cy.get('#hide-textbox', {timeout: uiTimeout})
+        .scrollIntoView()
+        .should('be.visible')
+        .then(($btn) => {
+
+            debugger;   // ONLY if the inspect is opened, this will work, else not
+            
+            expect($btn).to.have.attr('type', 'submit');
+        });
+
+    });
+});

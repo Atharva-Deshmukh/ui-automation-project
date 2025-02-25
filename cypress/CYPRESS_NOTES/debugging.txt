@@ -1,4 +1,0 @@
-We use cy.debug() and cy.pause()
-
-pause() is used mostly
-Never used debug()
