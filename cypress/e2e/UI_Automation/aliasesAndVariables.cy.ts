@@ -1,17 +1,4 @@
-/* When some locator changes, we need to make changes everywhere it is used
-So, this is tedious
-
-WORKAROUNDS:
-
-- Declare a global locator in helper file and call it
-- Alias the locator and then call it
-
-
-cy.get('target').as('targetAlias');
-cy.get('@targetAlias').find(..)
-
-
-Typically in Cypress you hardly need to ever use const, let, or var. 
+/* Typically in Cypress you hardly need to ever use const, let, or var. 
 When using closures (the .then($ele)) you'll always have access to the objects
 that were yielded to you without assigning them.
 
@@ -74,6 +61,9 @@ it('Use of const', () => {
             })
         })
 });
+
+Alias names cannot match some reserved words.
+These words include: test, runnable, timeout, slow, skip, and inspect.
 
 
 
@@ -152,6 +142,60 @@ cy.get('@comments').should((response) => {
     }
   })
 })
+
+
+                                                OPTIONS TO PASS IN as()
+
+Option    Default    Description
+----------------------------------
+type      query      The type of alias to store, which impacts how the value is retrieved later in the test.
+                     Valid values are "query" and "static".
+                     - A "query" alias re-runs all queries leading up to the resulting value each time 
+                       the alias is requested.
+                     - A "static" alias is retrieved once when the alias is stored and will never change.
+                     - "type" has no effect when aliasing intercepts, spies, and stubs.
+
+------------------------------------------------------------------------------------------------------
+                                        SOME INTERESTING USE CASES
+------------------------------------------------------------------------------------------------------
+WE can use alias to save us from pyramid of doom :
+
+cy.then((resp1) => {
+    cy.then((resp2) => {
+        cy.then((resp3) => {
+                resp1 + resp2 + resp3
+        })
+    })
+})
+
+we can simply alias them and use
+
+cy.get(resp1).as(resp1Alias)
+cy.get(resp2).as(resp2Alias)
+cy.get(resp3).as(resp3Alias)
+
+cy.then(() => {
+    this.resp1Alias + this.resp2Alias + this.resp3Alias
+})
+
+-----------------------------------------------------------------------------------------------
+When some locator changes, we need to make changes everywhere it is used
+So, this is tedious
+
+WORKAROUNDS:
+
+- Declare a global locator in helper file and call it
+- Alias the locator and then call it
+
+
+cy.get('target').as('targetAlias');
+cy.get('@targetAlias').find(..)
+----------------------------------------------------------------------------------------------
+
+We can also use alias for those elements that change within 2 seconds,
+normally, cy.get().expect(), the element obtained by cy.get() will change and expectation fails
+but with alias, it retries
+
 */
 
 import { uiTimeout } from "../../fixtures/commonData";
@@ -199,7 +243,7 @@ describe('WAY-2', () => {
     });
 });
 
-it.only('Alias (without "this") will always retry, thus storing latest value', function() {
+it('Alias (without "this") will always retry, thus storing latest value', function() {
     // I have combined both types of aliases in a single it block
     let obj = {color: 'red'};
 
@@ -220,7 +264,7 @@ it.only('Alias (without "this") will always retry, thus storing latest value', f
     })
 });
 
-it.only('Alias (with "this") will NOT  retry, thus storing first value', function() {
+it('Alias (with "this") will NOT  retry, thus storing first value', function() {
     let obj = {color: 'red'};
 
     cy.wrap(obj).its('color').as('colorAlias');
@@ -234,4 +278,24 @@ it.only('Alias (with "this") will NOT  retry, thus storing first value', functio
     });
 
     expect(this.colorAlias).to.eq('red');
+});
+
+it.only('PRESERVING INTITAL VALUE WITH ALIAS', function() {
+    let obj = {color: 'red'};
+
+    cy.wrap(obj).its('color').as('colorAlias', {type: 'static'});  // stores only initial state, even after retrying
+                                                                   // this was default behaviour of cypress and aliases before version 12
+    cy.get('@colorAlias').should('equal', 'red'); 
+    cy.then(() => {
+        expect(this.colorAlias).to.eq('red');
+    })
+
+    cy.then(() => {
+        obj.color = 'red_UPDATED';
+    });
+
+    cy.get('@colorAlias').should('equal', 'red');
+    cy.then(() => {
+        expect(this.colorAlias).to.eq('red');
+    })
 });
