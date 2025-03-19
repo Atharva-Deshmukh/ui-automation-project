@@ -1,6 +1,5 @@
 import { defineConfig } from "cypress";
 import fs from 'fs';
-import xlsx from 'xlsx';
 
 export default defineConfig({
   e2e: {
