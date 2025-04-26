@@ -1,7 +1,12 @@
 import { uiTimeout } from "../../fixtures/commonData";
 
 /* Whenever target = _blank, link will open in a new page, so we remove it in order to open new link in the 
-   same page */
+   same page 
+   
+
+   NOTE:
+   - Domains should match, cypress doesn't support different domains
+*/
 
 it('Way-1: Removing target = _blank', () => {
     // we try to open the new tab/page in the same page itself
@@ -21,7 +26,7 @@ it('Way-1: Removing target = _blank', () => {
 
         /* Added this in e2e.ts file to prevent test from failing,
         This was a site issue not from cypress
-        
+
         Cypress.on('uncaught:exception', (err, runnable) => {
             if (err.message.includes('postMessage')) {
                 return false; // prevent test from failing
