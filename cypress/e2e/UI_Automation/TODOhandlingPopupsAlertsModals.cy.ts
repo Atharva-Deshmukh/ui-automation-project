@@ -22,7 +22,7 @@ describe('Alert', () => {
     Description:                            Fires when your app calls the global window.alert() method. 
                                         Cypress will auto accept alerts. You cannot change this behavior. */
 
-    it('Way-1: Using built in events', () => {
+    it('Way-1: Using built in event in cypress', () => {
         cy.visit('https://the-internet.herokuapp.com/javascript_alerts', { timeout: uiTimeout });
 
         /*
@@ -48,7 +48,7 @@ describe('Alert', () => {
         });
     });
 
-    it('Way-2: Stubing the window', () => {
+    it('Way-2: Stubing the window.alert() method', () => {
         cy.visit('https://demo.automationtesting.in/Alerts.html', { timeout: uiTimeout });
 
         cy.window().then((winObj) => {
@@ -61,8 +61,12 @@ describe('Alert', () => {
             .then(() => {
                 cy.get('@alertStub').should('have.been.calledOnceWith', 'I am an alert box!');
             });
+
+        cy.get('@alertStub').should('have.been.calledOnceWith', 'I am an alert box!');
     });
 });
+
+describe('Confirm handling cypress', () => {
 
 /* window.confirm():
 
@@ -85,43 +89,93 @@ Description:                            Fires when your app calls the global win
                                         separately
 */
 
-it('Confirmation Alert', () => {
-    cy.visit('https://the-internet.herokuapp.com/javascript_alerts', {timeout: uiTimeout});
+    it('Way-1: Using built in event in cypress', () => {
+        cy.visit('https://the-internet.herokuapp.com/javascript_alerts', { timeout: uiTimeout });
 
-    cy.get('button:contains("Click for JS Confirm")', {timeout: uiTimeout})
-    .should('be.visible')
-    .click().then(() => {
-        // By default, cypress automatically closes confirm alert by clicking on OK button
-        cy.on('window:confirm', (alertText) => {
-            expect(alertText).to.equal("I am a JS Confirm"); 
-        })
+        cy.get('button:contains("Click for JS Confirm")', { timeout: uiTimeout })
+            .should('be.visible')
+            .click()
+            .then(() => {
+                // By default, cypress automatically closes confirm alert by clicking on OK button
+                cy.on('window:confirm', (alertText) => {
+                    expect(alertText).to.equal("I am a JS Confirm");
+                })
 
-        cy.get('#result', {timeout: uiTimeout})
-        .should('be.visible')
-        .and('have.text', 'You clicked: Ok');
+                cy.get('#result', { timeout: uiTimeout })
+                    .should('be.visible')
+                    .and('have.text', 'You clicked: Ok');
+            });
+
+
+        cy.then(() => {
+            // Closing via cancel button, click button again to prompt alert
+            cy.get('button:contains("Click for JS Confirm")', { timeout: uiTimeout })
+                .should('be.visible')
+                .click();
+
+            /* We are first intercepting the confirm event, expecting on the text and then closing this */
+            cy.on('window:confirm', (alertText) => {
+                expect(alertText).to.equal("I am a JS Confirm");
+            });
+
+            /* Closing of alert is done internally by cypress only, we are just instructing it to close
+               using cancel button this time */
+
+            cy.on('window:confirm', () => false);
+
+            /* This can also be written as
+            
+            cy.on('window:confirm', () => {
+                return false;
+            }); */
+
+            cy.get('#result', { timeout: uiTimeout })
+                .should('be.visible')
+                .and('have.text', 'You clicked: Cancel');
+        });
     });
-    
-    
-    cy.then(() => {
-        // Closing via cancel button, click button again to prompt alert
-        cy.get('button:contains("Click for JS Confirm")', {timeout: uiTimeout})
-        .should('be.visible')
-        .click();
 
-        // First handle the confirm alert and validate on it
-        cy.on('window:confirm', (alertText) => {
-            expect(alertText).to.equal("I am a JS Confirm"); 
+    it('Way-2: Stubbing the window.confirm() method', () => {
+        cy.visit('https://the-internet.herokuapp.com/javascript_alerts', { timeout: uiTimeout });
+
+        // First stub, to test default acceptance of confirm alert by cypress
+        cy.window().then((winObj) => {
+            cy.stub(winObj, 'confirm').as('confirmStub').returns(true);
         });
 
-        // closing of alert is done internally by cypress only, we are just instructing it to close
-        // using cancel button this time
-        cy.on('window:confirm', () => false); 
+        cy.get('button:contains("Click for JS Confirm")', { timeout: uiTimeout })
+            .should('be.visible')
+            .click()
+            .then(() => {
 
-        cy.get('#result', {timeout: uiTimeout})
-        .should('be.visible')
-        .and('have.text', 'You clicked: Cancel');
+                cy.get('@confirmStub').should('have.been.calledOnceWith', 'I am a JS Confirm');
+
+                cy.get('#result', { timeout: uiTimeout })
+                    .should('be.visible')
+                    .and('have.text', 'You clicked: Ok');
+            });
+
+            /* Cypress automatically restores stubs between tests, not withing a single test, 
+               To manually restore it, do as below, and then we can stub confirm method again
+               and test cancel confirm scenario */
+
+            cy.get('@confirmStub').then((stub: any) => {
+                stub.restore();
+            });
+
+            cy.window().then((winObj) => {
+                cy.stub(winObj, 'confirm').as('confirmStub').returns(false);
+            });
+
+            cy.get('button:contains("Click for JS Confirm")', { timeout: uiTimeout })
+            .should('be.visible')
+            .click()
+
+            cy.get('#result', { timeout: uiTimeout })
+                .should('be.visible')
+                .and('have.text', 'You clicked: Cancel');
     });
-});
+}); 
 
 /*
 Logs me: (stub-1)prompt("I am a JS prompt")
