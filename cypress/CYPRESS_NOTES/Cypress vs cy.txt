@@ -1,0 +1,28 @@
+                                                Cypress vs cy
+                                                ------------
+
+
+Cypress.on()
+- registers global event listeners that apply to all tests (its global).
+- Cypress.on() persists until manually unbound.
+
+cy.on()
+- used for registering event listeners within a specific test
+- is automatically removed after a test completes
+
+Examples:
+
+// Test-specific event listener
+it('my test', () => {
+  cy.on('fail', (error, runnable) => {
+    // This listener will only be active for this test
+  });
+  cy.visit('https://example.com');
+});
+
+// Global event listener
+Cypress.on('fail', (error, runnable) => {
+  // This listener applies to all tests until manually unbound
+});
+
+To unbound event, manually delete the code, or use Cypress.off()
