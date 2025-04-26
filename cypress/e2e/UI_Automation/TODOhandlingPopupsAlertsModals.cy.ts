@@ -2,63 +2,66 @@ import { uiTimeout } from "../../fixtures/commonData";
 
 // TODO: https://www.youtube.com/watch?v=C2DjGl5a_-Y
 
-/* window.alert(): The alert window is automatically handled and closed by cypress
-which is why we don't see it in cypress runner time travel
-We don't need to write separate code to close an alert in cypress.
-Cypress auto accepts it.
+describe('Alert', () => {
 
-Log will have something like this -> (alert)I am a JS Alert [(alert) <text of alert>] 
-
-But to perform validation on alert window, we need to trigger event
-
-Event                                                    Details
-------------------------------------------------------------------------
-Name:                                                  window:alert
-
-Yields:                                             the alert text (String)
-
-Description:                            Fires when your app calls the global window.alert() method. 
-                                    Cypress will auto accept alerts. You cannot change this behavior. */
-
-it.only('Normal Alert Handling', () => {
-    cy.visit('https://the-internet.herokuapp.com/javascript_alerts', {timeout: uiTimeout});
-
-    /*
-
-    This code cannot validate on alert since alert is automatically closed by cypress
-    cy.get('button:contains("Click for JS Alert")', {timeout: uiTimeout})
-    .should('be.visible')
-    .click()
-    .then(() => {
-        cy.get('#result', {timeout: uiTimeout})
-        .should('have.text', 'You successfully clicked an alert');
-    }); 
+    /* window.alert(): The alert window is automatically handled and closed by cypress
+    which is why we don't see it in cypress runner time travel
+    We don't need to write separate code to close an alert in cypress.
+    Cypress auto accepts it.
     
-    */
+    Log will have something like this -> (alert)I am a JS Alert [(alert) <text of alert>] 
+    
+    But to perform validation on alert window, we need to trigger event
+    
+    Event                                                    Details
+    ------------------------------------------------------------------------
+    Name:                                                  window:alert
+    
+    Yields:                                             the alert text (String)
+    
+    Description:                            Fires when your app calls the global window.alert() method. 
+                                        Cypress will auto accept alerts. You cannot change this behavior. */
 
-   
-   cy.get('button:contains("Click for JS Alert")', {timeout: uiTimeout})
-   .should('be.visible')
-   .click();
-   
-   Cypress.on('window:alert', (alertText) => {
-       expect(alertText).to.equal("I am a JS Alert"); 
-   });
-});
+    it('Way-1: Using built in events', () => {
+        cy.visit('https://the-internet.herokuapp.com/javascript_alerts', { timeout: uiTimeout });
 
-it('Another way to handle Alert, stubbing', () => {
-    cy.visit('https://demo.automationtesting.in/Alerts.html', {timeout: uiTimeout});
+        /*
+    
+        This code cannot validate on alert since alert is automatically closed by cypress
+        cy.get('button:contains("Click for JS Alert")', {timeout: uiTimeout})
+        .should('be.visible')
+        .click()
+        .then(() => {
+            cy.get('#result', {timeout: uiTimeout})
+            .should('have.text', 'You successfully clicked an alert');
+        }); 
+        
+        */
 
-    // Create a Cypress stub to track window:alert calls
-    const alertStub = cy.stub();
-    Cypress.on('window:alert', alertStub);
 
-    cy.get('.btn.btn-danger')
-      .should('be.visible')
-      .click()
-      .then(() => {
-        cy.wrap(alertStub).should('have.been.calledWith', "I am an alert box!");
-      });
+        cy.get('button:contains("Click for JS Alert")', { timeout: uiTimeout })
+            .should('be.visible')
+            .click();
+
+        Cypress.on('window:alert', (alertText) => {
+            expect(alertText).to.equal("I am a JS Alert");
+        });
+    });
+
+    it('Way-2: Stubing the window', () => {
+        cy.visit('https://demo.automationtesting.in/Alerts.html', { timeout: uiTimeout });
+
+        cy.window().then((winObj) => {
+            cy.stub(winObj, 'alert').as('alertStub');
+        });
+
+        cy.get('.btn.btn-danger', {timeout: uiTimeout})
+            .should('be.visible')
+            .click()
+            .then(() => {
+                cy.get('@alertStub').should('have.been.calledOnceWith', 'I am an alert box!');
+            });
+    });
 });
 
 /* window.confirm():
