@@ -14,15 +14,25 @@ it('Way-1: Removing target = _blank', () => {
     .then(() => {
         // actual URL includes query params, so match this much part only, use include
         cy.url().should('include', 'testrigor.com');
+    }).then(() => {
+        cy.go('back').then(() => {
+            cy.url().should('include', 'selectorshub');
+        });
 
-        // Another way: .invoke('attr', 'target', '_self')
-
-        // cy.visit() will NEVER allow cross origin for security purpose and cypress' architecture limitation
-        // hence even if we m
+        /* Added this in e2e.ts file to prevent test from failing,
+        This was a site issue not from cypress
+        
+        Cypress.on('uncaught:exception', (err, runnable) => {
+            if (err.message.includes('postMessage')) {
+                return false; // prevent test from failing
+            }
+        });
+        
+        */
     });
 });
 
-it.only('Way-2: Setting target = _self also opens link in same page', () => {
+it('Way-2: Setting target = _self also opens link in same page', () => {
 
     cy.clearAllCookies();
     cy.clearAllLocalStorage();
