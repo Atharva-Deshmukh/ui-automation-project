@@ -77,6 +77,34 @@ describe('Alert', () => {
 
         cy.get('@alertStub').should('have.been.calledOnceWith', 'I am an alert box!');
     });
+
+    it.only('Way-3: Handling multiple alert popups one after another', () => {
+
+        /* Workaround: Use stub.getCall(n) => returns nth call
+
+           - Only accepts positive numbers.
+           - First call is at index 0.
+
+            Use stub.getCall(0) => returns first call
+            Use stub.getCall(1) => returns second call */
+
+        cy.visit('https://qaboxletstestcypresspracticesite.netlify.app/differentalerttypes', { timeout: uiTimeout });
+
+        let storedStub;
+
+        cy.window().then((winObj) => {
+            storedStub = cy.stub(winObj, 'alert').as('alertStub'); // cy.stub() returns a Sinon.js stub. 
+        });
+
+        cy.get('#miltiplealert', {timeout: uiTimeout})
+            .should('be.visible')
+            .click()
+            .then(() => {
+                expect(storedStub.getCall(0)).to.be.calledWithExactly('First Alert Box');
+                expect(storedStub.getCall(1)).to.be.calledWithExactly('Second Alert Box');
+                expect(storedStub.getCall(2)).to.be.calledWithExactly('Third Alert Box');
+            });
+    });
 });
 
 describe('Confirm handling cypress', () => {
@@ -202,7 +230,7 @@ describe('Prompt handling in cypress', () => {
 
     WE WILL STUB the prompt event before triggerring it */
 
-    it.only('There is no built in cypress event for this, we will need to stub it', () => {
+    it('There is no built in cypress event for this, we will need to stub it', () => {
         cy.visit('https://the-internet.herokuapp.com/javascript_alerts', { timeout: uiTimeout });
 
         let promptStub;
@@ -269,18 +297,34 @@ describe('Authentication alert popup', () => {
     });
 });
 
-// MODAL:
-/*
-Sometimes, some add like modal popup takes over suddenly and we need to close it since everyting in the DOM
-is covered by it.
+// Source: Gleb Bahmutov
+describe('Handling modal popup that covers entire page, like an ad', () => {
 
-Cypress get() and find() works in an iframe but this popup is out of that iframe, it needs to be handled
-separately
+    /* MODAL that covers entire page, Workaround:
+    Sometimes, some add like modal popup takes over suddenly and we need to close it since everyting in the DOM
+    is covered by it.
 
-Concept:
-window.top returns the topmost window in the hierarchy of window objects.
+    Cypress itself work in a separate iframe, and this popup is in another iframe, hence get() and find()
+    are not able to locate it.
 
-Workaround:
-Close that modal popup
-cy.wrap(window.top.document.querySelector('its locator')).click({force: true})
-*/
+    Concept:
+    window.top returns the topmost window in the hierarchy of window objects.
+
+    Workaround:
+    To Close that modal popup
+    cy.wrap(window.top.document.querySelector('Locator of close button of that popup')).click({force: true}) */
+
+    it('Workflow', () => {
+        cy.visit('https://www.bistromd.com/collections/lunch-signature', {timeout: uiTimeout});
+
+        cy.get('[href="#pop-1"] > .img-wrapper', {timeout: uiTimeout})
+        .should('be.visible')
+        .click();
+
+        cy.wait(8000);
+
+        // add aaygi ab
+
+        cy.pause();
+    });
+});
