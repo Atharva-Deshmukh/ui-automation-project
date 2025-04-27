@@ -2,6 +2,19 @@ import { uiTimeout } from "../../fixtures/commonData";
 
 // TODO: https://www.youtube.com/watch?v=C2DjGl5a_-Y
 
+/* CONCEPT NEEDED TO KNOW:
+cy.stub()
+
+Syntax
+cy.stub()
+cy.stub(object, method)
+
+cy.stub(user, 'addFriend')
+cy.stub(user, 'addFriend').as('addFriend')
+
+Arguments:
+ object (Object): The object that has the method to be replaced. */
+
 describe('Alert', () => {
 
     /* window.alert(): The alert window is automatically handled and closed by cypress
@@ -177,72 +190,61 @@ Description:                            Fires when your app calls the global win
     });
 }); 
 
-/*
-Logs me: (stub-1)prompt("I am a JS prompt")
+describe('Prompt handling in cypress', () => {
+    /* Logs me: (stub-1)prompt("I am a JS prompt")
 
-prompt has an input text too that needs to be passed, along with cancel and ok button
-It is too, handled by cypress internally by closing ok button by default
-we need to have separate event to write the prompt input
+    prompt has an input text too that needs to be passed, along with cancel and ok button
+    It is too, handled by cypress internally by closing ok button by default
+    we need to have separate event to write the prompt input
 
-CONCEPT NEEDED TO KNOW:
-cy.stub()
-
-Syntax
-cy.stub()
-cy.stub(object, method)
-
-cy.stub(user, 'addFriend')
-cy.stub(user, 'addFriend').as('addFriend')
-
-Arguments:
- object (Object): The object that has the method to be replaced.
- method (String): The name of the method on the object to be wrapped.
+    method (String): The name of the method on the object to be wrapped.
 
 
- WE WILL STUB the prompt event before triggerring it
-*/
-it('Handling Prompt', () => {
-    cy.visit('https://the-internet.herokuapp.com/javascript_alerts', {timeout: uiTimeout});
+    WE WILL STUB the prompt event before triggerring it */
 
-    let promptStub;
+    it.only('There is no built in cypress event for this, we will need to stub it', () => {
+        cy.visit('https://the-internet.herokuapp.com/javascript_alerts', { timeout: uiTimeout });
 
-    cy.window().then((win) => {
-        // this catches the prompt window, and then inputs the below string
-        promptStub = cy.stub(win, 'prompt').returns('PROMPT INPUT STRING');
-    });
+        let promptStub;
 
-    // now trigger prompt event
-    cy.get('button:contains("Click for JS Prompt")', {timeout: uiTimeout})
-    .should('be.visible')
-    .click().then(() => {
-        // prompt is closed internally by cypress by clicking on OK button
-        cy.get('#result', {timeout: uiTimeout})
-        .should('be.visible')
-        .and('have.text', 'You entered: PROMPT INPUT STRING');
+        cy.window().then((win) => {
+            // this catches the prompt window, and then inputs the below string
+            promptStub = cy.stub(win, 'prompt').returns('AD_PROMPT');
+        });
 
-        /*cypress does not allow re-stubbing a function that has already been wrapped.
-
-        You need to restore the stub before creating a new one for handling the cancel action. 
-        Use cy.stub().restore() before re-stubbing. 
-        Restore stub before re-stubbing */
-         promptStub.restore();
-    });
-
-    // CLOSING USING CANCEL BUTTON, repeating a same with extra event handling for cancel button
-    cy.then(() => {
-
-            // now trigger prompt event again
-            cy.get('button:contains("Click for JS Prompt")', {timeout: uiTimeout})
+        // now trigger prompt event
+        cy.get('button:contains("Click for JS Prompt")', { timeout: uiTimeout })
             .should('be.visible')
             .click().then(() => {
-                cy.on('window:prompt', () => false); // instructing to close using cancel button
-
-                cy.then(() => {
-                    cy.get('#result', {timeout: uiTimeout})
+                // prompt is closed internally by cypress by clicking on OK button
+                cy.get('#result', { timeout: uiTimeout })
                     .should('be.visible')
-                    .and('have.text', 'You entered: null');
-                });
+                    .and('have.text', 'You entered: AD_PROMPT');
+
+                /*cypress does not allow re-stubbing a function that has already been wrapped.
+        
+                You need to restore the stub before creating a new one for handling the cancel action. 
+                Use cy.stub().restore() before re-stubbing. 
+                Restore stub before re-stubbing */
+                promptStub.restore();
             });
+
+        // CLOSING USING CANCEL BUTTON, repeating a same with extra event handling for cancel button
+        cy.then(() => {
+
+            // now trigger prompt event again
+            cy.get('button:contains("Click for JS Prompt")', { timeout: uiTimeout })
+                .should('be.visible')
+                .click().then(() => {
+                    cy.on('window:prompt', () => false); // instructing to close using cancel button
+
+                    cy.then(() => {
+                        cy.get('#result', { timeout: uiTimeout })
+                            .should('be.visible')
+                            .and('have.text', 'You entered: null');
+                    });
+                });
+        });
     });
 });
 
