@@ -248,24 +248,25 @@ describe('Prompt handling in cypress', () => {
     });
 });
 
-it('HANDLING AUTHENTICATION POPUP', () => {
+describe('Authentication alert popup', () => {
+    it('HANDLING AUTHENTICATION POPUP', () => {
 
-    /* Here, we have two inputs to be passed in a prompt, username and password
-    we then have sign in button (OK button internally, closed by default by cypress)
-    and cancel button. 
+        /* Here, we have two inputs to be passed in a prompt, username and password
+        we then have sign in button (OK button internally, closed by default by cypress)
+        and cancel button. 
+        
+        We will use auth object in visit() */
     
-    We will use auth object in visit()
-    */
-
-    cy.visit('https://the-internet.herokuapp.com/basic_auth', {auth: 
-    {
-        username: 'admin',
-        password: 'admin' 
-    } 
+        cy.visit('https://the-internet.herokuapp.com/basic_auth', {auth: 
+        {
+            username: 'admin',
+            password: 'admin' 
+        } 
+        });
+    
+        cy.contains('Congratulations! You must have the proper credentials.', {timeout: uiTimeout})
+        .should('be.visible');
     });
-
-    cy.contains('Congratulations! You must have the proper credentials.', {timeout: uiTimeout})
-    .should('be.visible');
 });
 
 // MODAL:
