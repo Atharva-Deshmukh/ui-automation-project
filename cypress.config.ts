@@ -14,6 +14,7 @@ export default defineConfig({
 
     experimentalMemoryManagement: true,
     requestTimeout: 90000,
+    supportFile: "cypress/support/e2e.ts",
     responseTimeout: 90000,
     defaultCommandTimeout: 40000,
     pageLoadTimeout: 120000,  // used for cy.visit()
