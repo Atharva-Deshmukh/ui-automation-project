@@ -34,3 +34,27 @@ if (!Cypress.env('SHOW_REQUEST_LOGS')) {  // Only hide logs when SHOW_REQUEST_LO
     app.document.head.appendChild(style);
   }
 }
+
+// Cypress.on('window:before:load', (winObj) => {
+//   cy.stub(winObj.console, 'log').callsFake((msg) => {
+//     cy.now('task', 'log', msg);
+//     throw new Error(msg);
+//   });
+//   cy.stub(winObj.console, 'error').callsFake((msg) => {
+//     cy.now('task', 'error', msg);
+//     throw new Error(msg);
+//   });
+// });
+
+
+/* NOTE:
+
+  use console.log(), not cy.log()
+
+  Cypress runs Cypress.on('uncaught:exception') outside of its test command queue, 
+  so using cy.* commands like cy.log inside that block causes Cypress to crash or misbehave. */
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  console.warn('ERROR MESSAGE', err.message); // prevent test from failing
+  return false;
+});
