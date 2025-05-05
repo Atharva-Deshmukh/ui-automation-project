@@ -1,39 +1,32 @@
 /*
-By default, tests will not retry when they fail. You'll need to enable 
-test retries in your configuration to use this feature.
 
-/*
-import { defineConfig } from 'cypress'
+- By default, tests will not retry when they fail. 
+- We need to enable retries
 
-export default defineConfig({
-  retries: 2,
-})
-
-Once test retries are enabled, tests can be configured to have X number of retry 
-attempts. For example, if test retries have been configured with 2 retry 
-attempts, Cypress will retry tests up to 2 additional times (for a total 
-of 3 attempts) before potentially being marked as a failed test.
+Total reties = failed attempt + retries set in config
+Ex: if test retries configured = 2 attempts, 
+Cypress will retry tests up to 2 ADDTIONAL TIMES (for a total 
+of 3 attempts)
 
 
 When each test is run again, the following hooks will be re-run also:
 beforeEach
 afterEach
 
-However, failures in before and after hooks will not trigger a retry.
+However, failures in before() and after() do not trigger a retry.
 
 -------------------------------------------------------------------------------------------------------
-                                                CONFIGURATION
+                                          CONFIGURATION
+-------------------------------------------------------------------------------------------------------
 
 Global Configuration:
 
+    // cypress.config.ts file
+
     export default defineConfig({
     retries: {
-        // Configure retry attempts for `cypress run`
-        // Default is 0
-        runMode: 2,
-        // Configure retry attempts for `cypress open`
-        // Default is 0
-        openMode: 0,
+        runMode: 2, // For `cypress run` .Default = 0
+        openMode: 0, // For `cypress open` .Default = 0
     },
     })
 
@@ -97,9 +90,6 @@ describe(
 
 -------------------------------------------------------------------------------------------------------
 
-
-
-
 Can I access the current attempt counter from the test?
 you can use Cypress.currentRetry. 
 If you want to determine the total allowed attempts you can do the following:
@@ -107,19 +97,12 @@ If you want to determine the total allowed attempts you can do the following:
 it('does something differently on retry', { retries: 3 }, () => {
   // Cypress.currentRetry returns the current test retry count
   const attempt = Cypress.currentRetry
-
-  // cy.state('runnable') returns the current test object
-  // we can grab the total allowed attempts from its properties
-  const retries = cy.state('runnable')._retries
-
-  // use the "attempt" and "retries" values somehow
 })
 
 SCREENSHOTS:
-When a test retries, Cypress will continue to take screenshots for each failed attempt or 
+Cypress will continue to take screenshots for each failed attempt or 
 cy.screenshot() and suffix each new screenshot with (attempt n), corresponding to the 
-current retry attempt number.
-*/
+current retry attempt number. */
 
 describe("WORKFLOWS", {
     retries: {
