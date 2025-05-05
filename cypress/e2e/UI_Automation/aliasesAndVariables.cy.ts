@@ -1,9 +1,6 @@
-/* Typically in Cypress you hardly need to ever use const, let, or var. 
-When using closures (the .then($ele)) you'll always have access to the objects
-that were yielded to you without assigning them.
-
-
-                                                WHY ALIASES
+/* 
+                                                WHY ALIASES?
+                                                ------------
 
 Using .then() callback functions to access the previous command values is great—but what 
 happens when you're running code in hooks like before or beforeEach?
@@ -66,8 +63,8 @@ Alias names cannot match some reserved words.
 These words include: test, runnable, timeout, slow, skip, and inspect.
 
 
-
                                             WAYS TO ACCESS ALIASES
+                                            ----------------------
 
 - using shared context object of mocha and accessing it using 'this' keyword
   Note that here, we cannot use () => {}, since we are dealing with 'this' keyword.
@@ -80,7 +77,8 @@ These words include: test, runnable, timeout, slow, skip, and inspect.
                  cy.get('@alias').assertions()
   The cy.get() command is capable of accessing aliases with a special syntax using the @ character.
 
-                                            PRECAUTIONS while using this.
+                                            PRECAUTIONS while using this
+                                            ----------------------------
 
     Do not forget that Cypress commands are async!
     You cannot use a this.* reference until the .as() command runs.
@@ -106,6 +104,7 @@ cy.fixture('users.json').then((users) => {
 
 
                                                 USE CASES FOR BOTH
+                                                ------------------
 
 - When using this.users, it is stored on the context when it is first evaluated, it does not retries
 - But when using cy.get('@users'), any queries are re-evaluated every time the alias is accessed.
@@ -119,6 +118,7 @@ Cypress aliases (as('colorAlias')) are dynamically re-evaluated only when access
 
 
                                                 COMMON USES
+                                                -----------
 
 Example of aliasing an intercepted route and waiting on it to complete.
 
@@ -145,6 +145,7 @@ cy.get('@comments').should((response) => {
 
 
                                                 OPTIONS TO PASS IN as()
+                                                ----------------------
 
 Option    Default    Description
 ----------------------------------
