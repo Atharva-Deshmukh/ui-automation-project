@@ -141,30 +141,33 @@ describe.only('Gleb Bahmutav playlist - Advanced cy.each() workflow', () => {
         }
     });
 
-    /* When we try to break loop inside any command, then we cannot break each().
+    /* INTERVIEW QUESTION
+    
+      When we try to break loop inside any command, then we cannot break each().
 
        All the commands in cy.each() is queued up beforehand for each element for each()
 
        below console prints all buttons-[0,1,2...9] befoehand itself,
     */
-    // cy.visit('http://127.0.0.1:5500/Buttons16.html').then(() => {
-    //       cy.get('button', {timeout: 60000}).should('be.visible');
-    //       cy.get('.button-wrapper button', {timeout: 60000}).each(($btn, index) => {
-    //         console.log('Button -> ', index)
-    //         cy.wrap($btn)
-    //         .click()
-    //         .parent()
-    //         .find('p')
-    //         .should(($p) => {   
-    //           const text = $p.text().trim(); 
-    //           expect(text).to.not.be.empty; 
-    //         })
-    //         .invoke('text').then((digit) => {
-    //           cy.log('DIGIT -> ', digit);
-    //           if(digit === '7') return false;
-    //         });
-    //       });
-    // });
+
+    cy.visit('http://127.0.0.1:5500/Buttons16.html').then(() => {
+          cy.get('button', {timeout: 60000}).should('be.visible');
+          cy.get('.button-wrapper button', {timeout: 60000}).each(($btn, index) => {
+            console.log('Button -> ', index)
+            cy.wrap($btn)
+            .click()
+            .parent()
+            .find('p')
+            .should(($p) => {   
+              const text = $p.text().trim(); 
+              expect(text).to.not.be.empty; 
+            })
+            .invoke('text').then((digit) => {
+              cy.log('DIGIT -> ', digit);
+              if(digit === '7') return false;
+            });
+          });
+    });
 
     /* How to stop this queueing then? use a variable before each()
 
