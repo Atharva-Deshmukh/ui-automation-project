@@ -1,30 +1,32 @@
-/* What is shadow DOM
+/* 
+                                            What is shadow DOM
+                                            -----------------
 
-Shadow DOM is a web standard that allows developers to encapsulate HTML, CSS, and JavaScript 
-within a component, preventing styles and scripts from leaking in or out. It is widely used 
-in Web Components to create reusable, self-contained UI elements.
+A web standard that allows developers to encapsulate HTML, CSS, and JS 
+within a component, preventing styles and scripts from leaking in or out. 
+It is widely used to create reusable, self-contained UI elements.
 
-Key features of Shadow DOM:
+                                        Key features of Shadow DOM:
+                                        --------------------------
 
-Encapsulation: Styles and scripts inside the shadow DOM do not affect the main document, and vice versa.
-Scoped styles: CSS inside a shadow tree applies only to elements within it.
-Custom components: Enables the creation of reusable UI components.
+Encapsulation: Styles and scripts inside the shadow DOM do not affect the main document.
+Resusability.
 
-Just like shadow DOM enables encapsulation of components within a document, 
-iframe enables complete isolation of a webpage within another webpage.
+                                        Shadow DOM VS Iframes
+                                        ----------------------
 
-Security: Iframes provide sandboxing, allowing secure embedding of external content.
-Cross-origin Content: They enable embedding third-party content like advertisements, 
-payment gateways, or social media widgets.
-Independence: The embedded page operates independently with its own JavaScript execution, 
-styles, and DOM.
+Shadow DOM enables encapsulation of components within a document, 
+Iframe enables complete isolation of a webpage within another webpage.
+
 
                                             USE CASE:
+                                            --------
      Shadow DOM: Used in Web Components to create reusable UI elements.
      IFRAMES: Used to embed third-party content like ads, videos, or external pages.
 
 Known Issue
-When working with cy.click(), it sometimes won't click the right element in Chrome. It's happening because of the ambiguity in spec.
+When working with cy.click(), it sometimes won't click the right element in Chrome. 
+It's happening because of the ambiguity in spec.
 
 In this case, pass { position: 'top' } to cy.click() like below:
 
