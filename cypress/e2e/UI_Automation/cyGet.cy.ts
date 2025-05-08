@@ -1,11 +1,7 @@
 /* Internally, cy.get() uses jQuery engine. 
 
 When your selector contains characters that are used in CSS, 
-you need to add \\ in front of that character. In your case, it should be cy.get('nickname\\.\\.\\.1234')
-
-NOTES:
-
-*/
+you need to add \\ in front of that character. In your case, it should be cy.get('nickname\\.\\.\\.1234') */
 
 describe('cy.get() workflows', () => {
 
