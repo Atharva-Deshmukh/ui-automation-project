@@ -6,7 +6,8 @@ cy.get('nav') // yields <nav>
   .should('be.visible') // yields <nav>
   .and('have.class', 'open') // yields <nav>
 
-However, some chainers change the subject. In the example below, .and() yields the string sans-serif because the chainer have.css, 'font-family' changes the subject.
+However, some chainers change the subject. In the example below, 
+.and() yields the string sans-serif because the chainer have.css, 'font-family' changes the subject.
 
 cy.get('nav') // yields <nav>
   .should('be.visible') // yields <nav>
