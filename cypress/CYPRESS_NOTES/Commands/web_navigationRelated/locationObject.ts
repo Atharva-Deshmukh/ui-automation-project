@@ -62,7 +62,8 @@ Advantage Native Location
                 console.warn('Current URL:', location.href);
                 console.warn('Hostname:', location.hostname);
                 console.warn('Pathname:', location.pathname);
-                console.warn('Search params:', location.search);
+                console.warn('Search/Query params:', location.search);
+                console.warn('Protocol:', location.protocol);
               });
         });
     });
