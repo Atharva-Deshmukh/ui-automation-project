@@ -21,6 +21,8 @@ describe('cy.visit() test suite', () => {
         cy.visit('/').then((winObj) => {
             expect(winObj.navigator.language).to.eq('en-US');
         });
+
+        cy.reload(true)
     });
 
     /* When baseUrl is not provided:
