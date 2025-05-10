@@ -1,4 +1,3 @@
-import { inRange } from "cypress/types/lodash";
 import { uiTimeout } from "../../fixtures/commonData";
 
 /* What is an Iframe?
