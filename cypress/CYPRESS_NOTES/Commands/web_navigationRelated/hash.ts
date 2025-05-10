@@ -1,4 +1,4 @@
-/*
+ /*
 Get the current URL hash of the page that is currently active.
 
 This is an alias of cy.location('hash')
