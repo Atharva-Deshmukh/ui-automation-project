@@ -1,7 +1,7 @@
 /*
 Syntax
 cy.reload()
-cy.reload(forceReload)
+cy.reload(forceReload: boolean)
 
 Reload the page as if the user clicked 'Refresh'
 
