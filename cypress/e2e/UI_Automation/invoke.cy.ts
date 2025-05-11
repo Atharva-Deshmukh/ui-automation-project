@@ -117,6 +117,8 @@ describe("jQuery Methods Test using invoke()", () => {
 
         // picks function with index 1 and calls it with argument 4
         cy.wrap([square, double]).invoke(1, 4).should('equal', 8);
+
+        // picks function with index 0 and calls it with argument 6
         cy.wrap([square, double]).invoke(0, 6).should('equal', 36);
     });
 
@@ -166,7 +168,9 @@ describe("jQuery Methods Test using invoke()", () => {
         cy.get("#inputField").should("have.attr", "placeholder", "Enter text");
     });
 
-    it.skip(".removeAttr() - Remove Attribute \n .remove() - removes the full element", () => {
+    it.skip("\n .removeAttr() - Remove Attribute " + 
+            "\n .remove() - removes the full element", () => {
+                
         cy.get("#inputField").invoke("attr", "placeholder", "Enter text");
         cy.get("#inputField").invoke("removeAttr", "placeholder");
         cy.get("#inputField").should("not.have.attr", "placeholder");
@@ -269,7 +273,7 @@ describe("jQuery Methods Test using invoke()", () => {
         // DOM -> <button id="testButton" class="active" data-info="Sample Data">Click Me</button>
         // cy.get("#testButton").invoke("removeData", "info").then(() => {
         //     cy.get("#testButton").invoke("data", "info").should("be.undefined");
-        // });
+        // }); 
 
         /* The above code don't work:
         Query caches data() attributes internally after the first read.
