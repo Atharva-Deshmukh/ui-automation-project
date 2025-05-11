@@ -179,7 +179,9 @@ describe('Workflow for cypress jquery functions', () => {
         });
 
         it('check css background color', () => {
-            cy.get('a:contains(" Home")', { timeout: 60000 }).should('be.visible').invoke('css', 'color').should('equal', 'rgb(255, 165, 0)')
+            cy.get('a:contains(" Home")', { timeout: 60000 }).should('be.visible').invoke('css', 'color')
+            .should('equal', 'rgb(255, 165, 0)');
+
             cy.get('a:contains(" Home")', { timeout: 60000 }).should('be.visible').then(($ele) => {
                 expect( $ele.css('color')).to.eq('rgb(255, 165, 0)');
             });
@@ -216,7 +218,9 @@ describe('Workflow for cypress jquery functions', () => {
             cy.get('#username', { timeout: 60000 }).should('be.visible').then(($ele) => {
                 expect($ele.attr('placeholder')).to.eq('AD');
             });
-            cy.get('#username', { timeout: 60000 }).should('be.visible').invoke('attr', 'placeholder').then((value) => {
+
+            cy.get('#username', { timeout: 60000 }).should('be.visible').invoke('attr', 'placeholder')
+            .then((value) => {
                 expect(value).to.eq('AD');
             });
         });
@@ -285,6 +289,7 @@ describe('Workflow for cypress jquery functions', () => {
 
         it('Why modifing of boolean values do not work with attr()', () => {
             // Using .attr()
+            // <input type="checkbox" id="subscribe" name="subscribe" value="yes" checked> <br>
             cy.get('#subscribe').then(($ele) => {
                 console.log($ele.attr('checked')); // Logs "checked" (HTML attribute)
                 console.log($ele.prop('checked')); // Logs true (DOM property)
@@ -302,7 +307,9 @@ describe('Workflow for cypress jquery functions', () => {
 
         it('using invoke() to modify values and verify', () => {
             cy.get('#option1', { timeout: 60000 }).should('be.visible').invoke('attr', 'value', 'UPDATED');
-            cy.get('#option1', { timeout: 60000 }).should('be.visible').invoke('attr', 'value').should('equal', 'UPDATED');
+            
+            cy.get('#option1', { timeout: 60000 }).should('be.visible').invoke('attr', 'value')
+            .should('equal', 'UPDATED');
         });
     });
 
@@ -318,6 +325,8 @@ describe('Workflow for cypress jquery functions', () => {
         });
     });
 
+    // used for conditional testing
+    // is(":visible")
     describe.only('$ele.is(":enabled") Demonstration', () => {
         before(() => {
             cy.visit('http://127.0.0.1:5500/DOMs/INPUTS_DOM.html', { timeout: 60000 });
