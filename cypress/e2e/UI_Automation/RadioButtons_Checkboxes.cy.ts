@@ -56,7 +56,7 @@ describe('Radio Buttons and Checkboxes in cypress', () => {
 
     });
 
-    it('Checking SINGLE CheckBoxe ', () => {
+    it('Checking a SINGLE CheckBox', () => {
 
         cy.visit('https://practice.expandtesting.com/checkboxes', {timeout: uiTimeout});
 
