@@ -7,59 +7,9 @@ Each keypress is delayed 10ms by default in order to simulate how a very fast
 user types!
 cy.get('[contenteditable]').type('some text!')
 
-
-# Cypress .type() Key Sequences
-
-## **Key Sequences**
-| Sequence        | Notes                                          |
-|---------------|----------------------------------------------|
-| `{{}`         | Types the literal `{` key                  |
-| `{backspace}` | Deletes character to the left of the cursor |
-| `{del}`       | Deletes character to the right of the cursor |
-| `{downArrow}` | Moves cursor down                           |
-| `{rightArrow}` | Moves cursor right                        |
-| `{leftArrow}` | Moves cursor left                          |
-| `{upArrow}`   | Moves cursor up                            |
-| `{enter}`     | Types the Enter key                        |
-| `{esc}`       | Types the Escape key                       |
-| `{insert}`    | Inserts character to the right of the cursor |
-| `{moveToEnd}` | Moves cursor to the end of the input       |
-| `{end}`       | Moves cursor to the end of the line        |
-| `{moveToStart}` | Moves cursor to the start of the input   |
-| `{home}`      | Moves cursor to the start of the line      |
-| `{pageDown}`  | Scrolls down                               |  FOR <textarea> that are large
-| `{pageUp}`    | Scrolls up                                 |
-| `{selectAll}` | Selects all text                           |
-
----
-
-## **Modifier Key Sequences**
-| Sequence  | Notes                                  |
-|-----------|--------------------------------------|
-| `{alt}`   | Activates the `altKey` modifier (`{option}` alias) |
-| `{ctrl}`  | Activates the `ctrlKey` modifier (`{control}` alias) |
-| `{meta}`  | Activates the `metaKey` modifier (`{command}`, `{cmd}` alias) |
-| `{shift}` | Activates the `shiftKey` modifier  |
-
-On Windows the META key is the Window (⊞) key.
-On Mac machines the META key is the Cmd (⌘) key.
-
----
-
-## **Options for `.type()`**
-| Option                         | Default                   | Description |
-|--------------------------------|--------------------------|------------|
-| `delay`                        | `10` ms                   | Delay after each keypress. |
-| `force`                        | `false`                   | Forces the action, disables waiting for actionability. |
-| `parseSpecialCharSequences`    | `true`                    | Parse special characters `{esc}`, `{enter}`, etc. Set to `false` to type them literally. |
-| `release`                      | `true`                    | Keep a modifier activated between commands. |
-| `timeout`                      | `defaultCommandTimeout`   | Time to wait for `.type()` to resolve before timing out. |
-| `waitForAnimations`            | `waitForAnimations`       | Whether to wait for elements to finish animating before executing the command. |
-
-
 KEY COMBINATIONS
 
-Same as a user holding down SHIFT and ALT, then pressing b
+Same as a user holding down SHIFT and ALT, then pressing b.
 The modifiers are released before typing 'hello'
     cy.get('input').type('{shift+alt+b}hello')
 
@@ -69,13 +19,12 @@ When a modifier is specified on its own, it will remain activated for the durati
 This is the same as a user holding down SHIFT and ALT, then typing 'hello'
 The modifiers are held for the duration of the command.
     cy.get('input').type('{shift}{alt}hello')
-
-all characters after {ctrl} will have 'ctrlKey' set to 'true' on their key events
     cy.get('input').type('{ctrl}test')
 
-By default, modifiers are released after each type command.
 
+By default, modifiers are released after each type command.
 To keep a modifier activated between commands, specify {release: false} in the options.
+
     cy.get('input').type('{alt}foo', { release: false }) // 'altKey' will be true while typing 'foo'
     cy.get('button').click() // 'altKey' will also be true during 'get' and 'click' commands
 
@@ -97,18 +46,24 @@ command and the modifier will be released after it.
 
     // 'altKey' will be true while typing 'foo'
     cy.get('input').type('{alt}foo', { release: false })
+
     // 'altKey' will be true during the 'get' and 'click' commands
     cy.get('button').click()
+
     // 'altKey' will be released after this command
     cy.get('input').type('{alt}')
+
     // 'altKey' will be false during the 'get' and 'click' commands
     cy.get('button').click()
 
 
-Do a shift + click
+                                    TECHNIQUE: Do a shift + click
+                                    -----------------------------
+
     execute a SHIFT + click on the first <li> {release: false} is necessary so that
     SHIFT will not be released after the type command
     cy.get('body').type('{shift}', { release: false }).get('li:first').click()
+    -------------
 
 Force typing regardless of its actionable state
     cy.get('input[type=text]').type('Test all the things', { force: true })
