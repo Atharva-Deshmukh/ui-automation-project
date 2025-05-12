@@ -1,7 +1,6 @@
 /* should(($ele) => {})
 
 Creates an assertion. Assertions are automatically retried until they pass or time out.
-Call back inside should(()) is retried unlike the one inside then(())
 
 IMP!!
 cy.get('input', { timeout: 10000 }).should(($input) => {
@@ -14,27 +13,27 @@ cy.get('input', { timeout: 10000 }).should(($input) => {
 })
 
 
-What's the difference between .then() and .should()/.and()?
-Using .then() allows you to use the yielded subject in a callback function and should 
+                What's the difference between .then() and .should()/.and()?
+                ----------------------------------------------------------
+
+Using .then(): allows you to use the yielded subject in a callback function and should 
 be used when you need to manipulate some values or do some actions.
-When using a callback function with .should() or .and(), on the other hand, 
-there is special logic to rerun the callback function until no assertions throw within it. 
+
+Using a callback function with .should() or  .and(): 
+There is special logic to rerun the callback function until no assertions throw within it. 
 You should be careful of side affects in a .should() or .and() callback function that you would 
 not want performed multiple times.
 
-
-        cy.get('.error').should('be.empty') // Assert that '.error' is empty
-        cy.contains('Login').should('be.visible') // Assert that el is visible
-        cy.wrap({ foo: 'bar' }).its('foo').should('eq', 'bar') // Assert the 'foo' property equals 'bar'
+Call back inside should(()) is retried unlike the one inside then(())
 
 In most cases, .should() yields the same subject it was given from the previous command.
+But the YEILD IS MODIFIED AS PER THE ASSERTION
         cy.get('nav') // yields <nav>
         .should('be.visible') // yields <nav>
         .should('have.css', 'font-family') // yields 'sans-serif'
         .and('match', /serif/) // yields 'sans-serif'
 
   Assert the anchor element has href attribute
-        // have.attr comes from chai-jquery
         cy.get('#header a').should('have.attr', 'href')
 
         Assert the href attribute is equal to '/users'
@@ -47,29 +46,23 @@ In most cases, .should() yields the same subject it was given from the previous 
         .and('equal', '/users') // checks the "href" value
 
 
- Callback function inside should()
- should(function() {
- })
- The callback function will be retried over and over again until no assertions within it throw.
-
  You cannot invoke Cypress commands inside of a .should() callback function. 
  Use Cypress commands before or after .should() instead.
  
- INCORRECT:
+                                        INCORRECT:
  cy.get('p').should(($p) => {
   cy.log($p)
   // ...
 })
 
-CORRECT:
+                                          CORRECT:
 cy.get('p')
   .should(($p) => {
     // ...
   })
   .log()
 
-// or
-
+                                    // or use it inside then()
 cy.get('p').then(($p) => {
   // ...
   cy.log($p)
@@ -81,7 +74,6 @@ cy.get('p').then(($p) => {
 cy.get('p')
   .should(($p) => {
     expect($p).to.have.length(3)
-
     return 'foo'
   })
   .then(($p) => {
@@ -91,7 +83,6 @@ cy.get('p')
   cy.get('button')
   .should(($button) => {
     expect({ foo: 'bar' }).to.deep.eq({ foo: 'bar' })
-
     return { foo: 'bar' } // return is ignored, .should() yields <button>
   })
   .then(($button) => {
