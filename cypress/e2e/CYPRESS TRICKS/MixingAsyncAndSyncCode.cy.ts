@@ -6,8 +6,8 @@ it('ERROR -> Mixing sync and async code', () => {
     .should('be.visible')
     .invoke('text')
     .then((text) => {
-        cy.log('text -> ' + text);
-        return text;
+        cy.log('text -> ' + text); // async part
+        return text;              // sync part
     })
     .should('equal', 'Practice Page');
 
