@@ -1,7 +1,3 @@
-/*
-
-*/
-
 import { uiTimeout } from "../../fixtures/commonData";
 import { table, getTableColumnIndex } from "../../support/ui-helpers/tableHelpers";
 
