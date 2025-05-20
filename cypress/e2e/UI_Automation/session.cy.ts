@@ -52,6 +52,8 @@ Hence, use cy.visit() at that time. in each it block
 
 NOTE: cy.session() misbehaves with testIsolation: true, since All sessionData, localStorage and cookies are
 automatically cleared between tests.
+
+NOTES BELOW
 */
 
 describe('WORKFLOWS', () => {
@@ -98,3 +100,68 @@ describe('WORKFLOWS', () => {
     // });
 
 });
+
+/*
+Switching sessions inside tests
+Because cy.session() clears the page and all session data before running setup, 
+you can use it to easily switch between sessions without first needing to log the previous user out. 
+This allows tests to more accurately represent real-world scenarios and helps keep test run times short.
+
+const login = (name) => {
+  cy.session(name, () => {
+    cy.request({
+      method: 'POST',
+      url: '/login',
+      body: { name, password: 's3cr3t' },
+    }).then(({ body }) => {
+      window.localStorage.setItem('authToken', body.token)
+    })
+  })
+}
+
+it('should transfer money between users', () => {
+  login('user')
+  cy.visit('/transfer')
+  cy.get('#amount').type('100.00')
+  cy.get('#send-money').click()
+
+  login('other-user')
+  cy.visit('/account_balance')
+  cy.get('#balance').should('eq', '100.00')
+})
+
+If your custom login command returns a value that you use to assert in a test, 
+wrapping it with cy.session() will break that test. However, it's usually easy to solve this 
+by refactoring the login code to assert directly inside setup.
+
+Before
+
+Cypress.Commands.add('loginByApi', (username, password) => {
+  return cy.request('POST', `/api/login`, {
+    username,
+    password,
+  })
+})
+
+it('should return the correct value', () => {
+  cy.loginByApi('user', 's3cr3t').then((response) => {
+    expect(response.status).to.eq(200)
+  })
+})
+
+After
+
+Cypress.Commands.add('loginByApi', (username, password) => {
+  cy.session(username, () => {
+    cy.request('POST', `/api/login`, {
+      username,
+      password,
+    }).then((response) => {
+      expect(response.status).to.eq(200)
+    })
+  })
+})
+
+it('is a redundant test', () => {
+})
+*/
