@@ -12,7 +12,7 @@ export default defineConfig({
        this also helps to log element yeild on console after clicking element */
     numTestsKeptInMemory: 50,
 
-    experimentalMemoryManagement: true,
+    // experimentalMemoryManagement: true,
     requestTimeout: 90000,
     supportFile: "cypress/support/e2e.ts",
     responseTimeout: 90000,
