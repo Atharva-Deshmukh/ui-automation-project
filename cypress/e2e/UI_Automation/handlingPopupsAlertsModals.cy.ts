@@ -1,8 +1,7 @@
 import { uiTimeout } from "../../fixtures/commonData";
 
-// TODO: https://www.youtube.com/watch?v=C2DjGl5a_-Y
-
 /* CONCEPT NEEDED TO KNOW:
+
 cy.stub()
 
 Syntax
@@ -74,11 +73,9 @@ describe('Alert', () => {
             .then(() => {
                 cy.get('@alertStub').should('have.been.calledOnceWith', 'I am an alert box!');
             });
-
-        cy.get('@alertStub').should('have.been.calledOnceWith', 'I am an alert box!');
     });
 
-    it.only('Way-3: Handling multiple alert popups one after another', () => {
+    it('Way-3: Handling multiple alert popups one after another', () => {
 
         /* Workaround: Use stub.getCall(n) => returns nth call
 
@@ -196,7 +193,7 @@ Description:                            Fires when your app calls the global win
                     .and('have.text', 'You clicked: Ok');
             });
 
-            /* Cypress automatically restores stubs between tests, not withing a single test, 
+            /* Cypress automatically restores stubs between tests, not within a single test, 
                To manually restore it, do as below, and then we can stub confirm method again
                and test cancel confirm scenario */
 
@@ -225,10 +222,7 @@ describe('Prompt handling in cypress', () => {
     It is too, handled by cypress internally by closing ok button by default
     we need to have separate event to write the prompt input
 
-    method (String): The name of the method on the object to be wrapped.
-
-
-    WE WILL STUB the prompt event before triggerring it */
+    method (String): WE WILL STUB the prompt event before triggerring it */
 
     it('There is no built in cypress event for this, we will need to stub it', () => {
         cy.visit('https://the-internet.herokuapp.com/javascript_alerts', { timeout: uiTimeout });
