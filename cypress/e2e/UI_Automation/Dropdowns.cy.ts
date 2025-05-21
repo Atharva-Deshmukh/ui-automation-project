@@ -1,6 +1,4 @@
-import { should } from "chai";
 import { uiTimeout } from "../../fixtures/commonData";
-import { trim } from "cypress/types/lodash";
 
 describe('Handling dropdowns in Cypress', () => {
     it.skip("Traditional Dropdowns with <select>", () => {
@@ -21,6 +19,7 @@ describe('Handling dropdowns in Cypress', () => {
            options are visible only on clicking the span
 
            in such dropdowns, there are <input> tags, so search elements by input tag
+           And type
         */
         cy.visit('https://www.dummyticket.com/dummy-ticket-for-visa-application/', {timeout: uiTimeout}).then(() => {
             cy.get('p:contains("Dummy ticket booking")', {timeout: uiTimeout})
@@ -91,7 +90,7 @@ describe('Handling dropdowns in Cypress', () => {
         //     });
         // });
 
-        // Scenario - 1
+        // Scenario - 2
         cy.visit('https://www.wikipedia.org/', {timeout: uiTimeout}).then(() => {
             cy.contains('Wikipedia').should('be.visible');
             let options = [];
