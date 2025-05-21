@@ -2,7 +2,7 @@ import { uiTimeout } from "../../fixtures/commonData";
 
 describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
 
-    it.skip('siblings()', () => {
+    it('siblings()', () => {
         /*  Get all siblings of the current element exlcuding the current element
         
         DOM USED:
@@ -34,7 +34,7 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
         .should('have.length', 3);
         
     });
-    it.skip('next() and prev()', () => {
+    it('next() and prev()', () => {
         /*  Get the immediately following sibling of each DOM element
         
         DOM USED:
@@ -76,7 +76,7 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
         
     });
 
-    it.skip('nextAll() and prevAll()', () => {
+    it('nextAll() and prevAll()', () => {
         /*  Get all following siblings of each DOM element in a set of matched DOM elements.
         
         DOM USED:
@@ -121,7 +121,7 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
         
     });
 
-    it.skip('nextUntil(selector) and prevUntil(selector)', () => {
+    it('nextUntil(selector) and prevUntil(selector)', () => {
         /*  Get all following siblings of each DOM element in a set of matched DOM 
              elements up to, but not including, the element provided.
 
@@ -161,7 +161,7 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
         
     });
 
-    it.skip('childern()', () => {
+    it('childern()', () => {
         /*  Get all following siblings of each DOM element in a set of matched DOM 
              elements up to, but not including, the element provided.
 
@@ -214,7 +214,7 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
         
     });
 
-    it.skip('parent() and parents() and parentsUntil()', () => {
+    it('parent() and parents() and parentsUntil()', () => {
         /*  .parent() only travels a single level up the DOM tree as opposed to the .parents() command.
 
         DONT PASS SELECTOR in parent(), it misbehaves
