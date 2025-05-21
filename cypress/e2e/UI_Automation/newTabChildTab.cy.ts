@@ -1,13 +1,10 @@
 import { uiTimeout } from "../../fixtures/commonData";
 
 describe('New Tab handling in cypress', () => {
-    /* Whenever target = _blank, link will open in a new page, so we remove it in order to open new link in the 
-       same page 
-       
+    /* Whenever target = _blank, link will open in a new page, 
+       so we remove it in order to open new link in the same page 
     
-       NOTE:
-       - Domains should match, cypress doesn't support different domains
-    */
+       NOTE: Domains should match, cypress doesn't support different domains */
 
     it('Way-1: Removing target = _blank', () => {
         // we try to open the new tab/page in the same page itself
