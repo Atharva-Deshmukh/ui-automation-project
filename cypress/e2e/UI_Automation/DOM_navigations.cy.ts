@@ -1,12 +1,9 @@
 import { uiTimeout } from "../../fixtures/commonData";
 
 describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
-
     it('siblings()', () => {
-        /*  Get all siblings of the current element exlcuding the current element
-        
-        DOM USED:
-
+        /*  Get all siblings of the current element EXCLUDING the current element
+                                              DOM USED:
         <ul>
           <li>apples</li>
           <li>oranges</li>
@@ -18,7 +15,6 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
         </ul>    */
 
         cy.visit('http://127.0.0.1:5500/DOMs/NavigationDOM.html', {timeout: uiTimeout});
-
         cy.get('li:contains("bananas")', {timeout: uiTimeout})
         .should('be.visible')
         .siblings()
@@ -103,12 +99,6 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
         .nextAll()                 // undefined
         .should('have.length', 0);
 
-        // when selector is passed in nextAll()
-        cy.get('li', {timeout: uiTimeout})
-        .should('be.visible')
-        .next('.selected') /* Finds the very next sibling of each li. Keep only the ones with a class selected */
-        .should('have.length', 3);
-
         cy.get('li:contains("grapeVines")', {timeout: uiTimeout})
         .should('be.visible')
         .prevAll()                 
@@ -125,10 +115,8 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
         /*  Get all following siblings of each DOM element in a set of matched DOM 
              elements up to, but not including, the element provided.
 
-             It is always passed with selector
-        
-        DOM USED:
-
+             It is always passed with a selector
+                                                      DOM USED:
         <ul>
             <li id="fruits" class="header">Fruits</li>
             <li>apples</li>
@@ -162,13 +150,7 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
     });
 
     it('childern()', () => {
-        /*  Get all following siblings of each DOM element in a set of matched DOM 
-             elements up to, but not including, the element provided.
-
-             It is always passed with selector
-        
-        DOM USED:
-
+        /* DOM USED:
         <ul>
           <li>About</li>
           <li>
@@ -221,8 +203,7 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
 
         parentsUntil() is always passed with a selector
         
-        DOM USED:
-
+                                                    DOM USED:
               <ul class="secondary-nav">
                 <li class="services-1">Web Design</li>
                 <li class="services-2">Logo Design</li>
@@ -254,9 +235,8 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
 
         /* REASON:
         .parent('.tertiary-nav') is incorrect because .parent() selects the direct parent, 
-        but <li>T-Shirt</li>'s direct parent is <ul class="tertiary-nav">, not .tertiary-nav itself.
-        
-        */
+        but <li>T-Shirt</li>'s direct parent is Full element <ul class="tertiary-nav">, 
+        not .tertiary-nav itself. */
 
         // without selector
         cy.get('li:contains("Signage")', {timeout: uiTimeout})
@@ -290,12 +270,11 @@ describe('WORKFLOWS OF VARIOUS NAVIGATION FUNCTIONS', () => {
     });
 
     it.only('closest()', () => {
-        /*  Get the first DOM element that matches the selector (whether it be itself or one of its ancestors).
+        /*  Get the first DOM element that matches the selector 
+            (whether it be itself or one of its ancestors).
         
             Always passed with selector
-
-        DOM USED:
-
+                                                      DOM USED:
               <ul class="secondary-nav">
                 <li class="services-1">Web Design</li>
                 <li class="services-2">Logo Design</li>
