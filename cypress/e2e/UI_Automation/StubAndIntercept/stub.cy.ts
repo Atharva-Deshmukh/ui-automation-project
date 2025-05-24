@@ -1,15 +1,11 @@
 /* Syntax
 cy.stub()
 cy.stub(object, method)
-
-Yields 
+                                                Yields
+                                                ------ 
 cy.stub() is synchronous and returns a value (the stub) instead of a Promise-like chain-able object. 
 It can be aliased.
-cy.stub() returns a Sinon.js stub and hence all the sinon stub methods are available with it.
-
-*/
-
-import Sinon from "cypress/types/sinon";
+cy.stub() returns a Sinon.js stub and hence all the sinon stub methods are available with it.*/
 
 describe('WORKFLOWS', () => {
     it('Create a stub and manually replace a function with this stub', () => {
