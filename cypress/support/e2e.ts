@@ -52,7 +52,9 @@ if (!Cypress.env('SHOW_REQUEST_LOGS')) {  // Only hide logs when SHOW_REQUEST_LO
   use console.log(), not cy.log()
 
   Cypress runs Cypress.on('uncaught:exception') outside of its test command queue, 
-  so using cy.* commands like cy.log inside that block causes Cypress to crash or misbehave. */
+  so using cy.* commands like cy.log inside that block causes Cypress to crash or misbehave. 
+  
+  Also, cy.log() is asynchronous and Cypress.on() is synchronous */
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   console.warn('ERROR MESSAGE', err.message); // prevent test from failing
