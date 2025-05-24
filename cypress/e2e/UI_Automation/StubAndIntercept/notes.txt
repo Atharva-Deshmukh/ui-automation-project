@@ -65,7 +65,6 @@ cy.intercept('/users*', (req) => {
 The interception object that cy.wait() yields you has everything you need to 
 make assertions
 
-
 cy.intercept('POST', '/users').as('new-user')
 cy.wait('@new-user').should('have.property', 'response.statusCode', 201)
 
@@ -334,8 +333,10 @@ cy.intercept('POST', '/organization', (req) => {
 
 If a Promise is returned from the route callback, it will be awaited before continuing with the request.
 cy.intercept('POST', '/login', (req) => {
+
   // you could asynchronously fetch test data...
   return getLoginCredentials().then((credentials) => {
+
     // ...and then, use it to supplement the outgoing request
     req.headers['authorization'] = credentials
   })
@@ -381,6 +382,7 @@ You can add, modify or delete a header to all outgoing requests using a beforeEa
 beforeEach(() => {
   cy.intercept(
     { url: 'http://localhost:3001/**', middleware: true },
+
     // Delete 'if-none-match' header from all outgoing requests
     (req) => delete req.headers['if-none-match']
   )
@@ -511,7 +513,6 @@ the browser cache, it will never hit the network layer, and cy.intercept() will 
 
 To see if a request is cached or made actually, network tab >> size column, we will see (memory cached)
 or (disk cached)
-
 
 If you would like to intercept resources that normally send cache headers, here are some workarounds:
 
