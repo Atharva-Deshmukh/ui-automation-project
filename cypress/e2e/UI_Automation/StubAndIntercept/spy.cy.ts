@@ -1,7 +1,7 @@
-/* Wrap a method in a spy in order to record calls to and arguments of 
-the function.
+/* Spy is usually used during unit testing
 
-Spy is usually used during unit testing
+Wrap a method in a spy in order to record calls to and arguments of 
+the function.
 
 cy.spy() is a utility function, and is not a Cypress command, query or assertion. 
 It is not retryable, chainable, or timeout-able.
@@ -44,7 +44,7 @@ describe('WORKFLOWS', () => {
         cy.get('@logAlias').should('be.calledOnceWith', str);
     });
 
-    it('Lets spy on a function that is executed after delay', () => {
+    it.only('Lets spy on a function that is executed after delay', () => {
         let str: string = 'Hello SDET';
 
         cy.spy(console, 'log').as('logAlias');
@@ -52,6 +52,8 @@ describe('WORKFLOWS', () => {
         setTimeout(() => {
             console.log(str);
         }, 7000);
+
+        cy.log('I am before delay');
 
         cy.get('@logAlias', {timeout: uiTimeout}).should('be.calledOnceWith', str);
     });
@@ -64,5 +66,14 @@ describe('WORKFLOWS', () => {
         console.log(obj);
 
         cy.get('@logAlias', {timeout: uiTimeout}).should('be.calledWith', obj);
+    });
+
+    it('Spying on native JS object', () => {
+        cy.spy(Object, 'keys').as('keySpy');
+
+        let keys: string[] = Object.keys({a: 'A', b: 'B'});
+
+        expect(keys).to.deep.equal(['a', 'b']);
+        cy.get('@keySpy', {timeout: 20000}).should('be.calledOnceWith', {a: 'A', b: 'B'});
     });
 });
