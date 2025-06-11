@@ -19,6 +19,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "cypress-plugin-snapshots": "^1.4.4",
     "cypress-real-events": "^1.14.0",
     "pdfkit": "^0.15.0"
   }
