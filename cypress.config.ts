@@ -39,7 +39,7 @@ export default defineConfig({
         reportDir: 'cypress/reports/mocha',
         quite: true,  // to suppress console logs
         overwrite: false,  // to overwrite previous reports
-        html: false, // to generate HTML ouput of test run
+        html: true, // to generate HTML ouput of test run
         json: true // to generate JSON ouput of test run
       }
     },
