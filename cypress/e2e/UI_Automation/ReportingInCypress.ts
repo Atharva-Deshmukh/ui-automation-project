@@ -90,6 +90,21 @@ Cypress.on("test:after:run", (test, runnable) => {
     addContext({ test }, screenshot);
   }
 });
+
+-----------------------------------------
+VIDEOS of failed test cases ONLY
+
+       on('after:spec', (spec, results) => {
+              if (config.video) {
+                if (results.stats.failures || results.stats.skipped) {
+                  console.log('SPEC FAILED OR SKIPPED, NOT DELETING VIDEO');
+                } else {
+                  console.log('Deleting video...');
+                  const fs = require('fs');  /* Sometimes, global import don't work, hence separate import  */
+                  fs.unlinkSync(results.video);
+                }
+              }
+       });
  
 
 */
