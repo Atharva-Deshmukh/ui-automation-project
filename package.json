@@ -6,9 +6,12 @@
   "author": "Atharva Deshmukh",
   "license": "MIT",
   "scripts": {
-    "open:dev-int-ui": "cypress open dev-int-ui",
-    "run-headed:dev-int-ui": "cypress run cypress/e2e/dev-int-ui --headed",
-    "run-headless:dev-int-ui": "cypress run cypress/e2e/dev-int-ui --headless"
+    "cy:verify": "cypress verify",
+    "cy:info": "cypress info ",
+    "cy:run-dev-int-1": "cypress run --e2e --browser=chrome --spec 'cypress/e2e/dev-int-1/**'",
+    "cy:run-dev-int-2": "cypress run --e2e --browser=chrome --spec 'cypress/e2e/dev-int-2/**'",
+    "cy:open-dev-int-1": "cypress open --e2e --browser=chrome --config specPattern=\"cypress/e2e/dev-int-1/*.cy.ts\"",
+    "cy:open-specificSpec": "cypress open --e2e --browser=chrome --config specPattern=\"cypress/e2e/**/*_SPEC_2.cy.ts\""
   },
   "devDependencies": {
     "@4tw/cypress-drag-drop": "^2.2.5",
