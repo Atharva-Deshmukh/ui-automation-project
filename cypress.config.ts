@@ -24,7 +24,7 @@ export default defineConfig({
     defaultCommandTimeout: 40000,
     pageLoadTimeout: 30000,  // used for cy.visit()
     testIsolation: false,    // no logout after each it block and data is preserved across test suite
-    video: false,
+    video: true, // by default it has videos for failing tests only
     viewportWidth: 1920,
     viewportHeight: 1080,
     watchForFileChanges: false,
