@@ -29,6 +29,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "cypress-failed-log": "^2.10.0",
     "cypress-multi-reporters": "^2.0.5",
     "cypress-plugin-snapshots": "^1.4.4",
     "cypress-real-events": "^1.14.0",

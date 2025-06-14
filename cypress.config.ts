@@ -46,6 +46,8 @@ export default defineConfig({
     setupNodeEvents(on, config) {
        initPlugin(on, config);
 
+       require('cypress-failed-log/on')(on);  // to log failed test commands in console
+
        on('after:spec', (spec, results) => {
               if (config.video) {
                 if (results.stats.failures || results.stats.skipped) {

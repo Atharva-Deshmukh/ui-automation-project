@@ -17,6 +17,7 @@
 import './commands'
 import "cypress-real-events";
 import 'cypress-plugin-snapshots/commands';
+import "cypress-failed-log";
 
 import addContext from "mochawesome/addContext";
 
