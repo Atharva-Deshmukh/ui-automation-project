@@ -29,8 +29,25 @@ export default defineConfig({
     viewportHeight: 1080,
     watchForFileChanges: false,
     slowTestThreshold: 180_000,
+    reporter: 'cypress-multi-reporters',
+    screenshotsFolder: 'cypress/reports/mochareports/assets',
+    screenshotOnRunFailure: true,  // to take screenshot on test failure
+    videosFolder: 'cypress/videos',
+    reporterOptions: {
+      reporterEnabled: 'mochawesome',
+      mochawesomeReporterOptions: {
+        reportDir: 'cypress/reports/mocha',
+        quite: true,  // to suppress console logs
+        overwrite: false,  // to overwrite previous reports
+        html: false, // to generate HTML ouput of test run
+        json: true // to generate JSON ouput of test run
+      }
+    },
     setupNodeEvents(on, config) {
        initPlugin(on, config);
+
+      
+
       // implement node event listeners here
 
       // Code to launch browser in icognito mode
