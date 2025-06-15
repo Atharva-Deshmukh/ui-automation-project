@@ -16,6 +16,7 @@ export default defineConfig({
     /* numTestsKeptInMemory: 50 (default), --> making it 0 disables timetravel
        this also helps to log element yeild on console after clicking element */
     numTestsKeptInMemory: 50,
+    experimentalStudio: true,  // to enable experimental Studio feature
 
     // experimentalMemoryManagement: true,
     requestTimeout: 90000,
