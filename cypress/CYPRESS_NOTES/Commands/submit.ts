@@ -1,5 +1,4 @@
-/*
-The subject must be a <form>.
+/* The subject must be a <form>.
 
 Correct Usage
 cy.get('form').submit() // Submit a form
@@ -20,6 +19,4 @@ cy.get('#contact').submit()
 "action" to submit a form. It could be clicking a submit <button>, or pressing enter on a keyboard.
 
 If you want the other guarantees of waiting for an element to become actionable, you should use a 
-different command like .click() or .type().
-
-*/
+different command like .click() or .type(). */
