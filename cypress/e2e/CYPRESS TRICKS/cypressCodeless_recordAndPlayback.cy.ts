@@ -4,6 +4,7 @@
 
 
  set experimentalStudio: true in cypress.config.ts to enable this feature.
- It allows you to record your actions in the browser and generate Cypress tests automatically.
+ It allows you to record your actions in the browser and generate Cypress 
+ tests automatically.
 
 */
