@@ -1,0 +1,24 @@
+App Events
+
+uncaught:exception
+window:confirm
+window:alert
+window:before:load
+window:load
+window:before:unload
+window:unload
+url:changed
+
+Cypress Events
+
+fail
+viewport:changed
+scrolled
+command:enqueued
+command:start
+command:end
+command:retry
+log:added
+log:changed
+test:before:run
+test:after:run
