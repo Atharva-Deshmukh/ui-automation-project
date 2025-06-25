@@ -284,8 +284,9 @@ it('Alias (with "this") will NOT  retry, thus storing first value', function() {
 it.only('PRESERVING INTITAL VALUE WITH ALIAS', function() {
     let obj = {color: 'red'};
 
-    cy.wrap(obj).its('color').as('colorAlias', {type: 'static'});  // stores only initial state, even after retrying
-                                                                   // this was default behaviour of cypress and aliases before version 12
+    cy.wrap(obj).its('color').as('colorAlias', {type: 'static'}); 
+    // stores only initial state, even after retrying
+    // this was default behaviour of cypress and aliases before version 12
     cy.get('@colorAlias').should('equal', 'red'); 
     cy.then(() => {
         expect(this.colorAlias).to.eq('red');
