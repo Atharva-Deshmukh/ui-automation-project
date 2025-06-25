@@ -112,7 +112,6 @@ describe.only('Gleb Bahmutav playlist - Advanced cy.each() workflow', () => {
           /* The custom .should() waits until the text inside the <p> element is no longer empty. 
           It will keep retrying every few milliseconds (Cypress automatically does this) until the 
           text is available. */
-
           cy.get('.button-wrapper button', {timeout: 60000}).each(($btn) => {
             cy.wrap($btn)
             .click()
