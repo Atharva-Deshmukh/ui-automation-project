@@ -1,4 +1,4 @@
-when cypress is set to typescrip, by default, it does not import JSON using
+when cypress is set to typescript, by default, it does not import JSON using
 import data from '../../fixtures/jsonFile';
 
 so in tsconfig.json >> compiler options, we add 
