@@ -3,9 +3,8 @@
  files of information created/updated when visiting a website and stored on 
  the user's web browser. 
 
- HTTP is a sessionless protocol, so after providing the user with web page,
-it forgots the 
-session, to help it remember the session and other details of user 
+HTTP is a sessionless protocol, so after providing the user with web page,
+it forgets the session, to help it remember the session and other details of user 
 Cookies are stored in the browser, they help to recognise the user mainly
 
 Types of Cookies:
