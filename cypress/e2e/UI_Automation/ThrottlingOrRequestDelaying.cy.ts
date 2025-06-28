@@ -12,15 +12,26 @@ It is very difficult to get locator for it unless u have the source code for it.
   being hit and being executed in the background, so intercept it and delay it/throttle it
 - To delay it, we use cypress promise as cypress waits automatically for its resolution
 
+
+To get the locator of that loader/spinner
+in inspect >> sources >> add snipper >> debugger;
+reload the page and run this snippet immediately after the page loads
 */
 
-it('Workflow', () => {
-    let xhrReq = 'https://someURL/1';
+describe('WORKFLOW', () => {
+  it('Workflow', () => {
+    const xhrReq = /getconfig\/sodar/;
 
-    // capture, delay request by 5 seconds or so and get the locator from cypress runner
-    cy.intercept(xhrReq, (interceptedReq) => {
-        return Cypress.Promise.delay(5000).then(() => {interceptedReq.continue();})
+
+    cy.visit('https://practice-automation.com/spinners/', { timeout: 10000 }).then(() => {
+
+      cy.intercept(xhrReq, (interceptedReq) => {
+        console.warn('Response -> ', interceptedReq);
+        return Cypress.Promise.delay(15000).then(() => interceptedReq.continue())
+      }).as('spinnerXhr');
+
+      cy.get('.spinner', { timeout: 20000 }).should('be.visible');
     });
+  });
 
-    // Assertions for loader here
 });
