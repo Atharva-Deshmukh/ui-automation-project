@@ -1,4 +1,0 @@
-/*
-What is the default origin
-gleb videos
-*/
