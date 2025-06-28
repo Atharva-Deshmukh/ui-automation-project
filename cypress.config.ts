@@ -161,5 +161,7 @@ export default defineConfig({
 
 
 env: {
+  AD_TEST: 'CONFIG_VAR',
+  ADMIN_PASSWORD: "TO BE OVERWRITTEN",
 }
 });
