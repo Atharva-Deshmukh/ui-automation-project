@@ -1,7 +1,10 @@
 it('TC - 1', () => {
-  expect(undefined).to.be.undefined;
-});
-
-it('TC - 2', () => {
-  expect(null).to.be.null;
+  /*
+    USERNAME: 'DEV_INT_2_USERNAME',
+  PASSWORD: 'DEV_INT_2_PASSWORD',
+  DIRECTORY: 'dev-int-2'
+  */
+  expect(Cypress.env('USERNAME')).to.equal('DEV_INT_2_USERNAME');
+  expect(Cypress.env('PASSWORD')).to.equal('DEV_INT_2_PASSWORD');
+  expect(Cypress.env('DIRECTORY')).to.equal('dev-int-2');
 });
