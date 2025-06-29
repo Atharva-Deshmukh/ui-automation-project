@@ -18,6 +18,7 @@ import './commands'
 import "cypress-real-events";
 import 'cypress-plugin-snapshots/commands';
 import "cypress-failed-log";
+import 'cypress-downloadfile/lib/downloadFileCommand';
 
 import addContext from "mochawesome/addContext";
 

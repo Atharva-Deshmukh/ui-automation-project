@@ -1,0 +1,13 @@
+{
+  "specName": "cypress\\e2e\\UI_Automation\\fileManagement.cy.ts",
+  "title": "File download workflow",
+  "suiteName": "File Downloads",
+  "testName": "File Downloads File download workflow",
+  "testError": "`cy.task('downloadFile')` failed with the following error:\n\n> Bad status code: 404",
+  "testCommands": [
+    "visit https://practice-automation.com/file-download/",
+    "getCookies ",
+    "task downloadFile, Object{5}",
+    "request "
+  ]
+}

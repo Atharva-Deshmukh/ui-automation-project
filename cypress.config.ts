@@ -2,6 +2,7 @@ import { defineConfig } from "cypress";
 import fs from 'fs';
 import xlsx from 'xlsx';
 const { initPlugin } = require('cypress-plugin-snapshots/plugin');
+const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
 
 export default defineConfig({
   e2e: {
@@ -46,6 +47,7 @@ export default defineConfig({
     },
     setupNodeEvents(on, config) {
        initPlugin(on, config);
+       on('task', {downloadFile});  // to enable file download functionality
 
        require('cypress-failed-log/on')(on);  // to log failed test commands in console
 

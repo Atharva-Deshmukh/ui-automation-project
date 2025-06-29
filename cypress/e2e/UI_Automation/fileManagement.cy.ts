@@ -61,6 +61,7 @@ This will fail unless the file input has the multiple property.
 */
 
 import { uiTimeout } from "../../fixtures/commonData";
+/// <reference types="cypress-downloadfile"/>
 
 describe('File Uploads', () => {
     it('Image upload, click and close that overlay modal (gleb video)', () => {
@@ -97,8 +98,16 @@ describe('File Uploads', () => {
     });
 });
 
+/* We use plugin: cypress-downloadfile
+ */
 describe('File Downloads', () => {
-    it('', () => {
+    it('File download workflow', () => {
+        cy.visit('https://practice-automation.com/file-download/', {timeout: uiTimeout});
 
+        // cy.get('.card-body a:contains("Download"):first', {timeout: uiTimeout}).should('be.visible').click();
+        cy.downloadFile('https://practice-automation.com/download/download-file/', 'cypress/downloads', 'sampleAD.pdf').then(() => {
+            cy.readFile('cypress/downloads/sampleAD.pdf').should('exist');
+            cy.log('File downloaded successfully');
+        });
     });
 });

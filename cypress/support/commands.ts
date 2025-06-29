@@ -41,6 +41,7 @@ import 'cypress-iframe';
 import '../support/customQueries';
 import '../support/customCommands';
 import '../support/tableCustomCommands';
+require('cypress-downloadfile/lib/downloadFileCommand');
 
 declare global {
   namespace Cypress {
@@ -61,6 +62,14 @@ declare global {
         better use a function
         */
         getTableColumnIndex(columnName: string): Chainable<any>;
+        
+        // Add this for cypress-downloadfile
+        downloadFile(
+            url: string,
+            directory: string,
+            fileName: string,
+            options?: Partial<{ headers: Record<string, string> }>
+        ): Chainable<void>;
     }
   }
 }
