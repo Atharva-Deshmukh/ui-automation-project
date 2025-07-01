@@ -20,5 +20,5 @@
     "cypress/**/*.ts",
     "cypress/support/cypress.d.ts",
     "**/*.ts"
-  ]
+, "cypress/e2e/Class-Based-POM/Tests..cy.ts"  ]
 }
